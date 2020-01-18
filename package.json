@@ -11,6 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.19.1",
+    "cheerio": "^1.0.0-rc.3",
+    "cheerio-crawler": "^1.1.1",
+    "express": "^4.17.1",
+    "puppeteer": "^2.0.0",
+    "sanitize-html": "^1.21.1"
   }
 }
