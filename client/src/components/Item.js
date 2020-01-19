@@ -79,11 +79,7 @@ class Item extends Component {
 }
 
   render() {
-<<<<<<< HEAD
-    const { name, date, time, id, url } = this.props;
-=======
-    const { image, title, duration, startTime, checked, id, onToggle } = this.props;
->>>>>>> 69f6411cae80b8997c1b3b11fb545a57547e5336
+    const { image, title, duration, startTime, checked, url, id, onToggle } = this.props;
 
     return (
       <div className="contest-item"

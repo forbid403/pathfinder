@@ -5,7 +5,7 @@ class ItemList extends Component {
   render() {
     const { contests, onToggle } = this.props;
     const contestList = contests.map(
-      ({ _id, site, title, duration, startTime, checked, onToggle }) => (
+      ({ _id, site, title, duration, startTime, checked, url, onToggle }) => (
         <Item
           _id = {_id}
           site={site}
@@ -14,6 +14,7 @@ class ItemList extends Component {
           startTime={startTime}
           checked={checked}
           onToggle={onToggle}
+          url = {url}
           key={_id}
         />
       )
