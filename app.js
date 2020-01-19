@@ -11,8 +11,8 @@ mongoose.connect('mongodb://localhost/pathfinder');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api/getcontestdata', (req, res) => {
-    contests.find().sort('-startTime').exec((err, contest)=>{
-        console.log(contest)
+    contests.find().sort({'startTime': -1}).exec((err, contest)=>{
+        res.send(contest)
     })
 });
 

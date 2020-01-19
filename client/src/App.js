@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    data: []
+  }
+
+  componentDidMount() {
+    this.callApi()
+      .then(res => {
+        console.log(res)
+        this.setState({ data: res })
+      })
+      .catch(err => console.log(err))
+  }
+
+  callApi = async () => {
+    const response = await fetch('api/getcontestdata');
+    const body = await response.json();
+    //console.log(body)
+    return body;
+  }
+
+
+  render() {
+    const { data } = this.state;
+    return (
+      <div>
+        <div>HELLO</div>
+        <ul>
+        {data.map(item => {
+          return <li>{item[0]}</li>;
+        })}
+        </ul>
+      </div>
+
+    )
+  }
 }
 
-export default App;
+export default App
