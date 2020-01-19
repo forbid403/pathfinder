@@ -3,28 +3,26 @@ import Item from './Item';
 
 class ItemList extends Component {
   render() {
-    const { contests, noticeWhenDone } = this.props;
-
+    const { contests, onToggle } = this.props;
     const contestList = contests.map(
-      ({id, image, name, date, time, url, num, checked}) => (
+      ({ _id, site, title, duration, startTime, checked, onToggle }) => (
         <Item
-          id = {id}
-          image = {image}
-          name = {name}
-          date = {date}
-          time = {time}
-          url = {url}
-          num = {num}
-          noticeWhenDone = {noticeWhenDone}
-          checked = {checked}
-          key = {id}
+          _id = {_id}
+          site={site}
+          title={title}
+          duration={duration}
+          startTime={startTime}
+          checked={checked}
+          onToggle={onToggle}
+          key={_id}
         />
       )
     );
+    console.log(contestList)
 
     return (
       <div>
-        {contestList}       
+        {contestList}
       </div>
     );
   }

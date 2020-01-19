@@ -6,8 +6,6 @@ import Tab from './components/Tab'
 
 
 class App extends Component {
-
-
   constructor(props) {
     super(props);
 
@@ -30,48 +28,17 @@ class App extends Component {
 
   id = 13; //state로 넣어도 될듯?
 
-  componentDidMount() {
+  componentWillMount() {
     this.callApi()
       .then(res => {
-        console.log(res)
-        this.setState({ data: res })
+        this.setState({ 
+          contests : res,
+          currentContests : res
+        })
       })
       .catch(err => console.log(err))
   }
 
-  componentWillMount = async () => {
-    const contests = [
-      { id: 0, image: 0, name: 'First Go To Google Contest', date: "2020-01-18 23:32:00", time: 0.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 2, image: 1, name: 'Second Go To Naver Contest', date: "2020-01-19 18:20:00", time: 2, url: 'http://www.naver.com', num: 0, checked: true },
-      { id: 1, image: 2, name: 'Third Go To Daum Contest', date: "2020-03-24 12:00:00", time: "1.5", url: 'http://www.daum.net', num: 0, checked: false },
-      { id: 3, image: 0, name: 'Codding Contest', date: "2020-03-31 12:40:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 4, image: 0, name: 'Come On Contest', date: "2020-02-12 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 5, image: 2, name: 'Hardest Ever Codding Contest', date: "2020-02-15 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 6, image: 0, name: 'Welcome New Personal Contest', date: "2020-01-20 01:50:50", time: 2.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 7, image: 2, name: 'Korea Algorithm Contest', date: "2020-01-19 03:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 8, image: 1, name: 'Conventinal BST Contest', date: "2020-01-20 01:50:50", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 9, image: 0, name: 'Hollywood Wow Cheese Contest', date: "2020-02-01 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 10, image: 0, name: 'ILoveChicken And Juice And Apple Contest', date: "2020-01-24 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 11, image: 2, name: "I'm Hungry But It's Okay", date: "2020-01-02 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-      { id: 12, image: 1, name: 'Algorithm JeaMitDda Algorithm Study', date: "2020-02-18 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
-    ]
-    this.setState({
-      contests,
-      currentContests: contests
-    })
-  }
-
-  handleCreate = () => {
-    const { input, contests } = this.state;
-    this.setState({
-      input: '', //input 비워주고 concat을 사용해 배열에 추가 (?)
-      contests: contests.concat({
-        id: this.id++,
-        text: input,
-        checked: false
-      })
-    });
-  }
 
   changeCurrentCategory = (selectedCategory) => {
     const { contests } = this.state;
@@ -82,20 +49,18 @@ class App extends Component {
     { id: 3, name: '종료' }*/
 
     let startDate = new Date().getTime()
-    //const endDate = this.state.timeUntil.getTime()
-    //let remains = endDate - startDate
     let filtered = []
 
     if (category.id === 0) //all
       filtered = contests
     else if (category.id === 1) //not yet
-      filtered = contests.filter(contest => new Date(contest.date).getTime() - startDate >= 0)
+      filtered = contests.filter(contest => new Date(contest.startTime).getTime() - startDate >= 0)
     else if (category.id === 2) //in progress
-      filtered = contests.filter(contest => (new Date(contest.date).getTime() - startDate < 0) &&
-        (new Date(contest.date).getTime() - startDate >= (contest.time * (-1) * 1000 * 60 * 60)))
+      filtered = contests.filter(contest => (new Date(contest.startTime).getTime() - startDate < 0) &&
+        (new Date(contest.startTime).getTime() - startDate >= (parseFloat(contest.duration) * (-1) * 1000 * 60 * 60)))
     else //done
-      filtered = contests.filter(contest => (new Date(contest.date).getTime() - startDate < 0) &&
-        (new Date(contest.date).getTime() - startDate < (contest.time * (-1) * 1000 * 60 * 60)))
+      filtered = contests.filter(contest => (new Date(contest.startTime).getTime() - startDate < 0) &&
+        (new Date(contest.startTime).getTime() - startDate < (parseFloat(contest.duration) * (-1) * 1000 * 60 * 60)))
 
     this.setState({
       currentCategory: category.name,

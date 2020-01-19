@@ -25,34 +25,24 @@ class Item extends Component {
 
   componentDidMount() {
     //select image!
-    if (this.props.image === 0) { this.setState({source: leet}) }
-    else if (this.props.image === 1) { this.setState({source: top}) }
+    
+    if (this.props.site === "Leetcode") { this.setState({source: leet}) }
+    else if (this.props.site === "Topcoder") { this.setState({source: top}) }
     else { this.setState({source: at}) }
 
-    //time format: "2020.01.18 13:30"
-    /*
-    let parseMe = this.props.date
-    let year = parseMe.substring(0, 4)
-    let month = parseMe.substring(5, 7)
-    let day = parseMe.substring(8, 10)
-    let hour = parseMe.substring(11, 13)
-    let minute = parseMe.substring(14, 16)
-
-    let dateString = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":00"
-    let setMe = new Date(dateString)
-    this.setState({timeUntil: setMe})*/
-    let setMe = new Date(this.props.date)
+    let setMe = this.props.startTime
     this.setState({timeUntil: setMe})
 
     this.textInterval = setInterval(() => {
       let startDate = new Date().getTime()
-      const endDate = this.state.timeUntil.getTime()
+      const endDate = new Date(this.state.timeUntil)
       let remains = endDate - startDate
-  
+
       let days = Math.floor((remains % (1000 * 60 * 60 * 24 * 60 * 60 * 24)) / (1000 * 60 * 60 * 24))
       let hours = Math.floor((remains % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
       let minutes = Math.floor((remains % (1000 * 60 * 60)) / (1000 * 60))
       let seconds = Math.floor((remains % (1000 * 60)) / 1000)
+      
   
       let showMe = days + "d " + hours + "h " + minutes + "m " + seconds + "s"
       this.setState({timer: showMe})
@@ -62,7 +52,7 @@ class Item extends Component {
         this.setState({timer: null})
         this.setState({timerBar: null})
 
-        if (remains >= (this.props.time * (-1) * 1000 * 60 * 60)) //in progress!
+        if (remains >= (parseFloat(this.props.duration) * (-1) * 1000 * 60 * 60)) //in progress!
         {
           this.setState({backgroundColor: "#e4f5e6"})
           this.setState({backgroundImage: "url('images/hourBackground_blue.png')"})
@@ -89,7 +79,11 @@ class Item extends Component {
 }
 
   render() {
+<<<<<<< HEAD
     const { name, date, time, id, url } = this.props;
+=======
+    const { image, title, duration, startTime, checked, id, onToggle } = this.props;
+>>>>>>> 69f6411cae80b8997c1b3b11fb545a57547e5336
 
     return (
       <div className="contest-item"
@@ -103,15 +97,15 @@ class Item extends Component {
         </div>
 
         <div className = "contest-name" style = {{color: this.state.foregroundColor}}>
-          <div>{name}</div>
-          <div className = "contest-date">{date}　</div>
+          <div>{title}</div>
+          <div className = "contest-date">{startTime}　</div>
           <div className = "contest-timer-bar">{this.state.timerBar}</div>
           <div className = "contest-timer">　{this.state.timer}</div>
         </div>
         
         <div className = "contest-time"
         style = {
-          {color: this.state.foregroundColor, backgroundImage: this.state.backgroundImage}}>{time}h</div>
+          {color: this.state.foregroundColor, backgroundImage: this.state.backgroundImage}}>{duration}h</div>
         {
           false && (<div className="check-mark">✓</div>)
         }
