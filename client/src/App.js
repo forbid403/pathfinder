@@ -6,8 +6,6 @@ import Tab from './components/Tab'
 
 
 class App extends Component {
-
-
   constructor(props) {
     super(props);
 
@@ -30,18 +28,15 @@ class App extends Component {
 
   id = 13; //state로 넣어도 될듯?
 
-  componentDidMount() {
+  componentWillMount() {
     this.callApi()
       .then(res => {
-        console.log(res)
-        this.setState({ data: res })
+        this.setState({ contests : res })
       })
       .catch(err => console.log(err))
   }
 
-
-
-
+/*
   componentWillMount = async () => {
     const contests = [
       { id: 0, image: 0, name: 'Leetcode Weekly Contest', date: "2020-01-18 23:32:00", time: 0.5, checked: false },
@@ -59,7 +54,6 @@ class App extends Component {
       { id: 12, image: 1, name: 'Algorithm JeaMitDda Algorithm Study', date: "2020-02-18 12:00:00", time: 1.5, checked: false },
     ]
     this.setState({
-      contests,
       currentContests: contests
     })
   }
@@ -75,6 +69,7 @@ class App extends Component {
       })
     });
   }
+ */
 
   handleToggle = (id) => {
 
@@ -142,7 +137,7 @@ class App extends Component {
         />
 
         <ListTemplate>
-          <ItemList contests={currentContests} onToggle={handleToggle} />
+          <ItemList contests={contests} onToggle={handleToggle} />
         </ListTemplate>
       </Fragment>
 
