@@ -3,9 +3,9 @@ import Item from './Item';
 
 class ItemList extends Component {
   render() {
-    const { contests, onToggle } = this.props;
+    const { contests, noticeWhenDone } = this.props;
     const contestList = contests.map(
-      ({ _id, site, title, duration, startTime, checked, url, onToggle }) => (
+      ({ _id, site, title, duration, startTime, num, checked, url, onToggle }) => (
         <Item
           _id = {_id}
           site={site}
@@ -13,6 +13,8 @@ class ItemList extends Component {
           duration={duration}
           startTime={startTime}
           checked={checked}
+          num = {num}
+          noticeWhenDone = {noticeWhenDone}
           onToggle={onToggle}
           url = {url}
           key={_id}

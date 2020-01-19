@@ -73,7 +73,6 @@ class App extends Component {
   }
 
   changeOrderOfList = (letMeGo, num) => {
-    console.log("@@@ DONE: " + letMeGo.toString() + ", num: " + num.toString())
     const { contests } = this.state;
     const contest = contests.find(contest => contest.id === letMeGo);
 
