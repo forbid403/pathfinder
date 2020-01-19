@@ -18,13 +18,13 @@ class Item extends Component {
       timerBar: "|",
       backgroundImage: "url('images/hourBackground_blue_gray.png')",
       backgroundColor: "#ffffff",
-      foregroundColor: "#000000",
+      foregroundColor: "#000000"
     }
+
   }
 
-  componentWillMount(){
+  componentDidMount() {
     //select image!
-    
     if (this.props.image === 0) { this.setState({source: leet}) }
     else if (this.props.image === 1) { this.setState({source: top}) }
     else { this.setState({source: at}) }
@@ -37,15 +37,13 @@ class Item extends Component {
     let day = parseMe.substring(8, 10)
     let hour = parseMe.substring(11, 13)
     let minute = parseMe.substring(14, 16)
-    
+
     let dateString = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":00"
     let setMe = new Date(dateString)
     this.setState({timeUntil: setMe})*/
     let setMe = new Date(this.props.date)
     this.setState({timeUntil: setMe})
-  }
-  
-  componentDidMount() {
+
     this.textInterval = setInterval(() => {
       let startDate = new Date().getTime()
       const endDate = this.state.timeUntil.getTime()
@@ -78,6 +76,10 @@ class Item extends Component {
           if (this.props.image === 0) { this.setState({source: leet_gray}) }
           else if (this.props.image === 1) { this.setState({source: top_gray}) }
           else { this.setState({source: at_gray}) }
+
+          //notice to 'App.js' so that it can change the order of the full list.
+          this.props.noticeWhenDone(this.props.id, this.props.num);
+          clearInterval(this.textInterval);
         }
       }
       else
@@ -85,10 +87,6 @@ class Item extends Component {
         remains = remains - 1000; // minus 1 sec.
       }}, 1000);
 }
-
-  toggled(url) {
-    console.log(url);
-  }
 
   render() {
     const { name, date, time, id, url } = this.props;

@@ -3,10 +3,10 @@ import Item from './Item';
 
 class ItemList extends Component {
   render() {
-    const { contests } = this.props;
+    const { contests, noticeWhenDone } = this.props;
 
     const contestList = contests.map(
-      ({id, image, name, date, time, url, checked, onToggle}) => (
+      ({id, image, name, date, time, url, num, checked}) => (
         <Item
           id = {id}
           image = {image}
@@ -14,6 +14,8 @@ class ItemList extends Component {
           date = {date}
           time = {time}
           url = {url}
+          num = {num}
+          noticeWhenDone = {noticeWhenDone}
           checked = {checked}
           key = {id}
         />

@@ -41,19 +41,19 @@ class App extends Component {
 
   componentWillMount = async () => {
     const contests = [
-      { id: 0, image: 0, name: 'Go To Google Contest', date: "2020-01-18 23:32:00", time: 0.5, url: 'http://www.google.com', checked: false },
-      { id: 1, image: 1, name: 'Go To Naver Contest', date: "2020-01-19 18:20:00", time: 2, url: 'http://www.naver.com', checked: true },
-      { id: 2, image: 2, name: 'Go To Daum Contest', date: "2020-03-24 12:00:00", time: "1.5", url: 'http://www.daum.net', checked: false },
-      { id: 3, image: 0, name: 'Codding Contest', date: "2020-03-31 12:40:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 4, image: 0, name: 'Come On Contest', date: "2020-02-12 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 5, image: 2, name: 'Hardest Ever Codding Contest', date: "2020-02-15 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 6, image: 0, name: 'Welcome New Personal Contest', date: "2020-03-02 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 7, image: 2, name: 'Korea Algorithm Contest', date: "2020-01-19 03:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 8, image: 1, name: 'Conventinal BST Contest', date: "2020-01-19 02:30:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 9, image: 0, name: 'Hollywood Wow Cheese Contest', date: "2020-02-01 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 10, image: 0, name: 'ILoveChicken And Juice And Apple Contest', date: "2020-01-24 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 11, image: 2, name: "I'm Hungry But It's Okay", date: "2020-01-02 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
-      { id: 12, image: 1, name: 'Algorithm JeaMitDda Algorithm Study', date: "2020-02-18 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 0, image: 0, name: 'First Go To Google Contest', date: "2020-01-18 23:32:00", time: 0.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 2, image: 1, name: 'Second Go To Naver Contest', date: "2020-01-19 18:20:00", time: 2, url: 'http://www.naver.com', num: 0, checked: true },
+      { id: 1, image: 2, name: 'Third Go To Daum Contest', date: "2020-03-24 12:00:00", time: "1.5", url: 'http://www.daum.net', num: 0, checked: false },
+      { id: 3, image: 0, name: 'Codding Contest', date: "2020-03-31 12:40:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 4, image: 0, name: 'Come On Contest', date: "2020-02-12 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 5, image: 2, name: 'Hardest Ever Codding Contest', date: "2020-02-15 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 6, image: 0, name: 'Welcome New Personal Contest', date: "2020-01-20 01:50:50", time: 2.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 7, image: 2, name: 'Korea Algorithm Contest', date: "2020-01-19 03:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 8, image: 1, name: 'Conventinal BST Contest', date: "2020-01-20 01:50:50", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 9, image: 0, name: 'Hollywood Wow Cheese Contest', date: "2020-02-01 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 10, image: 0, name: 'ILoveChicken And Juice And Apple Contest', date: "2020-01-24 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 11, image: 2, name: "I'm Hungry But It's Okay", date: "2020-01-02 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
+      { id: 12, image: 1, name: 'Algorithm JeaMitDda Algorithm Study', date: "2020-02-18 12:00:00", time: 1.5, url: 'http://www.google.com', num: 0, checked: false },
     ]
     this.setState({
       contests,
@@ -71,10 +71,6 @@ class App extends Component {
         checked: false
       })
     });
-  }
-
-  handleToggle = (id) => {
-    
   }
 
   changeCurrentCategory = (selectedCategory) => {
@@ -111,6 +107,25 @@ class App extends Component {
     this.changeCurrentCategory(dataFromChild)
   }
 
+  changeOrderOfList = (letMeGo, num) => {
+    console.log("@@@ DONE: " + letMeGo.toString() + ", num: " + num.toString())
+    const { contests } = this.state;
+    const contest = contests.find(contest => contest.id === letMeGo);
+
+    if (contest.num === 0)
+    {
+      const removeHere = contests.indexOf(contest);
+      var insertMe = contests.splice(removeHere, 1);
+
+      console.log("@@@@ ING  " + contest.name);
+      contests.push(contest);
+      contest.num = 1;
+    }
+  }
+
+  noticeWhenDone = (letMeGo, num) => {
+    this.changeOrderOfList(letMeGo, num)
+  }
 
   callApi = async () => {
     const response = await fetch('api/getcontestdata');
@@ -119,12 +134,11 @@ class App extends Component {
     return body;
   }
 
-
   render() {
     const {
       handleToggle,
     } = this;
-    const { currentContests} = this.state;
+    const { currentContests } = this.state;
 
     return (
       <Fragment>
@@ -136,7 +150,9 @@ class App extends Component {
         />
 
         <ListTemplate>
-          <ItemList contests={currentContests} onToggled={handleToggle} />
+          <ItemList
+            contests={currentContests}
+            noticeWhenDone={this.noticeWhenDone}/>
         </ListTemplate>
       </Fragment>
 
