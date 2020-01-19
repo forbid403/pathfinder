@@ -5,7 +5,8 @@ const contestModel = require('../models/contest')
 const mongoose = require('mongoose')
 const schedule = require('node-schedule');
 
-async ()=> schedule.scheduleJob('0 10 * * *', function(){
+schedule.scheduleJob('0 10 * * *', ()=>{
+    console.log("schedule")
     getAtcoder().then(html => {
         console.log("Crawl Atcoder...")
     
