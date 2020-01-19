@@ -1,0 +1,12 @@
+.tabs {
+    width: 60%;
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: lightgray;
+    border-width: 1px;
+    border-radius: 1px;
+    border-style: solid;
+}
