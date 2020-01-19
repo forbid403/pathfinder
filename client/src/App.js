@@ -31,7 +31,10 @@ class App extends Component {
   componentWillMount() {
     this.callApi()
       .then(res => {
-        this.setState({ contests : res })
+        this.setState({ 
+          contests : res,
+          currentContests : res
+        })
       })
       .catch(err => console.log(err))
   }
@@ -84,20 +87,18 @@ class App extends Component {
     { id: 3, name: '종료' }*/
 
     let startDate = new Date().getTime()
-    //const endDate = this.state.timeUntil.getTime()
-    //let remains = endDate - startDate
     let filtered = []
 
     if (category.id === 0) //all
       filtered = contests
     else if (category.id === 1) //not yet
-      filtered = contests.filter(contest => new Date(contest.date).getTime() - startDate >= 0)
+      filtered = contests.filter(contest => new Date(contest.startTime).getTime() - startDate >= 0)
     else if (category.id === 2) //in progress
-      filtered = contests.filter(contest => (new Date(contest.date).getTime() - startDate < 0) &&
-        (new Date(contest.date).getTime() - startDate >= (contest.time * (-1) * 1000 * 60 * 60)))
+      filtered = contests.filter(contest => (new Date(contest.startTime).getTime() - startDate < 0) &&
+        (new Date(contest.startTime).getTime() - startDate >= (parseFloat(contest.duration) * (-1) * 1000 * 60 * 60)))
     else //done
-      filtered = contests.filter(contest => (new Date(contest.date).getTime() - startDate < 0) &&
-        (new Date(contest.date).getTime() - startDate < (contest.time * (-1) * 1000 * 60 * 60)))
+      filtered = contests.filter(contest => (new Date(contest.startTime).getTime() - startDate < 0) &&
+        (new Date(contest.startTime).getTime() - startDate < (parseFloat(contest.duration) * (-1) * 1000 * 60 * 60)))
 
     this.setState({
       currentCategory: category.name,
@@ -137,7 +138,7 @@ class App extends Component {
         />
 
         <ListTemplate>
-          <ItemList contests={contests} onToggle={handleToggle} />
+          <ItemList contests={currentContests} onToggle={handleToggle} />
         </ListTemplate>
       </Fragment>
 

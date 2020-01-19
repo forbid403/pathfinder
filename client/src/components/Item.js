@@ -29,18 +29,6 @@ class Item extends Component {
     else if (this.props.site === "Topcoder") { this.setState({source: top}) }
     else { this.setState({source: at}) }
 
-    //time format: "2020.01.18 13:30"
-    /*
-    let parseMe = this.props.date
-    let year = parseMe.substring(0, 4)
-    let month = parseMe.substring(5, 7)
-    let day = parseMe.substring(8, 10)
-    let hour = parseMe.substring(11, 13)
-    let minute = parseMe.substring(14, 16)
-    
-    let dateString = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":00"
-    let setMe = new Date(dateString)
-    this.setState({timeUntil: setMe})*/
     let setMe = this.props.startTime
     this.setState({timeUntil: setMe})
   }
@@ -50,12 +38,12 @@ class Item extends Component {
       let startDate = new Date().getTime()
       const endDate = new Date(this.state.timeUntil)
       let remains = endDate - startDate
-      console.log("end : ", typeof(endDate))
 
       let days = Math.floor((remains % (1000 * 60 * 60 * 24 * 60 * 60 * 24)) / (1000 * 60 * 60 * 24))
       let hours = Math.floor((remains % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
       let minutes = Math.floor((remains % (1000 * 60 * 60)) / (1000 * 60))
       let seconds = Math.floor((remains % (1000 * 60)) / 1000)
+      
   
       let showMe = days + "d " + hours + "h " + minutes + "m " + seconds + "s"
       this.setState({timer: showMe})
@@ -65,7 +53,7 @@ class Item extends Component {
         this.setState({timer: null})
         this.setState({timerBar: null})
 
-        if (remains >= (this.props.time * (-1) * 1000 * 60 * 60)) //in progress!
+        if (remains >= (parseFloat(this.props.duration) * (-1) * 1000 * 60 * 60)) //in progress!
         {
           this.setState({backgroundColor: "#e4f5e6"})
           this.setState({backgroundImage: "url('images/hourBackground_blue.png')"})
@@ -110,7 +98,7 @@ class Item extends Component {
         
         <div className = "contest-time"
         style = {
-          {color: this.state.foregroundColor, backgroundImage: this.state.backgroundImage}}>{duration}</div>
+          {color: this.state.foregroundColor, backgroundImage: this.state.backgroundImage}}>{duration}h</div>
         {
           false && (<div className="check-mark">✓</div>)
         }
