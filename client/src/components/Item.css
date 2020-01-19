@@ -53,7 +53,7 @@
   }
 
   .contest-time {
-    width: 2.5rem;
+    width: 2rem;
     height: fit-content;
     font-size: 10pt;
     text-align-last: center; /*내용 가운데 정렬*/

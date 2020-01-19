@@ -3,18 +3,18 @@ import Item from './Item';
 
 class ItemList extends Component {
   render() {
-    const { contests, onToggle } = this.props;
+    const { contests } = this.props;
 
     const contestList = contests.map(
-      ({id, image, name, date, time, checked, onToggle}) => (
+      ({id, image, name, date, time, url, checked, onToggle}) => (
         <Item
           id = {id}
           image = {image}
           name = {name}
           date = {date}
           time = {time}
+          url = {url}
           checked = {checked}
-          onToggle = {onToggle}
           key = {id}
         />
       )

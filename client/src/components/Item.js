@@ -86,13 +86,17 @@ class Item extends Component {
       }}, 1000);
 }
 
+  toggled(url) {
+    console.log(url);
+  }
+
   render() {
-    const { image, name, date, time, checked, id, onToggle } = this.props;
+    const { name, date, time, id, url } = this.props;
 
     return (
       <div className="contest-item"
            style={{background: this.state.backgroundColor}}
-           onClick={() => onToggle(id)}>
+           onClick={() => {window.open(url)}}>
         
         <div className = "web-image">
           <img src = {this.state.source} /*{source}*/

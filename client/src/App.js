@@ -39,24 +39,21 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
-
-
-
   componentWillMount = async () => {
     const contests = [
-      { id: 0, image: 0, name: 'Leetcode Weekly Contest', date: "2020-01-18 23:32:00", time: 0.5, checked: false },
-      { id: 1, image: 1, name: 'TopCoder Codding Contest', date: "2020-01-19 18:20:00", time: 2, checked: true },
-      { id: 2, image: 2, name: 'ILoveProgramming Algorithm Contest', date: "2020-03-24 12:00:00", time: "1.5", checked: false },
-      { id: 3, image: 0, name: 'Codding Contest', date: "2020-03-31 12:40:00", time: 1.5, checked: false },
-      { id: 4, image: 0, name: 'Come On Contest', date: "2020-02-12 12:00:00", time: 1.5, checked: false },
-      { id: 5, image: 2, name: 'Hardest Ever Codding Contest', date: "2020-02-15 12:00:00", time: 1.5, checked: false },
-      { id: 6, image: 0, name: 'Welcome New Personal Contest', date: "2020-03-02 12:00:00", time: 1.5, checked: false },
-      { id: 7, image: 2, name: 'Korea Algorithm Contest', date: "2020-01-19 03:00:00", time: 1.5, checked: false },
-      { id: 8, image: 1, name: 'Conventinal BST Contest', date: "2020-01-19 02:30:00", time: 1.5, checked: false },
-      { id: 9, image: 0, name: 'Hollywood Wow Cheese Contest', date: "2020-02-01 12:00:00", time: 1.5, checked: false },
-      { id: 10, image: 0, name: 'ILoveChicken And Juice And Apple Contest', date: "2020-01-24 12:00:00", time: 1.5, checked: false },
-      { id: 11, image: 2, name: "I'm Hungry But It's Okay", date: "2020-01-02 12:00:00", time: 1.5, checked: false },
-      { id: 12, image: 1, name: 'Algorithm JeaMitDda Algorithm Study', date: "2020-02-18 12:00:00", time: 1.5, checked: false },
+      { id: 0, image: 0, name: 'Go To Google Contest', date: "2020-01-18 23:32:00", time: 0.5, url: 'http://www.google.com', checked: false },
+      { id: 1, image: 1, name: 'Go To Naver Contest', date: "2020-01-19 18:20:00", time: 2, url: 'http://www.naver.com', checked: true },
+      { id: 2, image: 2, name: 'Go To Daum Contest', date: "2020-03-24 12:00:00", time: "1.5", url: 'http://www.daum.net', checked: false },
+      { id: 3, image: 0, name: 'Codding Contest', date: "2020-03-31 12:40:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 4, image: 0, name: 'Come On Contest', date: "2020-02-12 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 5, image: 2, name: 'Hardest Ever Codding Contest', date: "2020-02-15 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 6, image: 0, name: 'Welcome New Personal Contest', date: "2020-03-02 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 7, image: 2, name: 'Korea Algorithm Contest', date: "2020-01-19 03:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 8, image: 1, name: 'Conventinal BST Contest', date: "2020-01-19 02:30:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 9, image: 0, name: 'Hollywood Wow Cheese Contest', date: "2020-02-01 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 10, image: 0, name: 'ILoveChicken And Juice And Apple Contest', date: "2020-01-24 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 11, image: 2, name: "I'm Hungry But It's Okay", date: "2020-01-02 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
+      { id: 12, image: 1, name: 'Algorithm JeaMitDda Algorithm Study', date: "2020-02-18 12:00:00", time: 1.5, url: 'http://www.google.com', checked: false },
     ]
     this.setState({
       contests,
@@ -77,7 +74,7 @@ class App extends Component {
   }
 
   handleToggle = (id) => {
-
+    
   }
 
   changeCurrentCategory = (selectedCategory) => {
@@ -124,13 +121,10 @@ class App extends Component {
 
 
   render() {
-    const { input, contests, categories, selected } = this.state;
     const {
-      changeCurrentCategory,
-      handleCreate,
       handleToggle,
     } = this;
-    const { currentContests, currentCategory } = this.state;
+    const { currentContests} = this.state;
 
     return (
       <Fragment>
@@ -142,7 +136,7 @@ class App extends Component {
         />
 
         <ListTemplate>
-          <ItemList contests={currentContests} onToggle={handleToggle} />
+          <ItemList contests={currentContests} onToggled={handleToggle} />
         </ListTemplate>
       </Fragment>
 
