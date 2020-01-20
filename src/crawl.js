@@ -119,6 +119,7 @@ getAtcoder().then(html => {
     let ulList = []
     let temp = []
     let timeList = []
+    let durationList = []
     let ret = []
     const $ = cheerio.load(html.data)
     const $bodyList = $(".col-sm-8").find(".panel").find(".panel-body")
@@ -139,7 +140,12 @@ getAtcoder().then(html => {
         let durRet = temp[i][1].split("iso=")
         let durRet2 = durRet[1].split("&")
         timeList[i] = durRet2[0]
+
+        let num = temp[i][2].split(" ")
+        let duration = (num[1] / 60).toString()
+        durationList[i] = duration.substr(0, 3)
     }
+
     const $title = $(".col-sm-8").find(".panel")
     $title.each((i, elem) => {
         ret[i] = {
@@ -148,7 +154,7 @@ getAtcoder().then(html => {
     })
 
     for (var i = 1; i < ret.length; i++) {
-        saveModel("Atcoder", ret[i].title, timeList[i], temp[i][2], temp[i][0])
+        saveModel("Atcoder", ret[i].title, timeList[i], durationList[i], temp[i][0])
     }
     console.log("Atcoder save complete")
 });

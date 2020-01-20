@@ -18,14 +18,13 @@ class Item extends Component {
       timerBar: "|",
       backgroundImage: "url('images/hourBackground_blue_gray.png')",
       backgroundColor: "#ffffff",
-      foregroundColor: "#000000"
+      foregroundColor: "#000000",
+      done: false
     }
-
   }
 
   componentDidMount() {
     //select image!
-    
     if (this.props.site === "Leetcode") { this.setState({source: leet}) }
     else if (this.props.site === "Topcoder") { this.setState({source: top}) }
     else { this.setState({source: at}) }
@@ -35,7 +34,7 @@ class Item extends Component {
 
     this.textInterval = setInterval(() => {
       let startDate = new Date().getTime()
-      const endDate = new Date(this.state.timeUntil)
+      const endDate = new Date(this.state.timeUntil.slice(0, -1))
       let remains = endDate - startDate
 
       let days = Math.floor((remains % (1000 * 60 * 60 * 24 * 60 * 60 * 24)) / (1000 * 60 * 60 * 24))
@@ -56,9 +55,13 @@ class Item extends Component {
         {
           this.setState({backgroundColor: "#e4f5e6"})
           this.setState({backgroundImage: "url('images/hourBackground_blue.png')"})
+          
+          //notice to 'App.js' so that it can change the order of the full list.
+          this.props.noticeWhenChanged(0, this.props._id, this.props.num);
         }
-        else //done!
-        {
+        else//done!
+        {          
+          this.setState({done: true})
           this.setState({backgroundColor: "#e9ecef"})
           this.setState({foregroundColor: "#868e96"})
           this.setState({backgroundImage: "url('images/hourBackground.png')"})
@@ -68,7 +71,7 @@ class Item extends Component {
           else { this.setState({source: at_gray}) }
 
           //notice to 'App.js' so that it can change the order of the full list.
-          this.props.noticeWhenDone(this.props.id, this.props.num);
+          this.props.noticeWhenChanged(1, this.props._id, this.props.num);
           clearInterval(this.textInterval);
         }
       }
@@ -76,10 +79,37 @@ class Item extends Component {
       {
         remains = remains - 1000; // minus 1 sec.
       }}, 1000);
+
+    if (this.state.done === true) clearInterval(this.textInterval)
+  }
+
+dateToString(date)
+{
+    const year = date.getFullYear();
+
+    let month = date.getMonth() + 1;
+    if( month < 10 ) month = '0' + month;
+    
+    let day = date.getDate();
+    if( day < 10 ) day = '0' + day;
+
+    let hour = date.getHours();
+    if( hour < 10 ) hour = '0' + hour;
+
+    let min = date.getMinutes();
+    if( min < 10 ) min = '0' + min;
+
+    let sec = date.getSeconds();
+    if( sec < 10 ) sec = '0' + sec;
+
+    return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 }
 
   render() {
-    const { image, title, duration, startTime, checked, url, id, onToggle } = this.props;
+    const { image, title, duration, startTime, checked, url, _id, onToggle } = this.props;
+
+    const tmp_koreanTime = new Date(startTime.slice(0, -1));
+    const koreanTime = this.dateToString(tmp_koreanTime);
 
     return (
       <div className="contest-item"
@@ -94,7 +124,7 @@ class Item extends Component {
 
         <div className = "contest-name" style = {{color: this.state.foregroundColor}}>
           <div>{title}</div>
-          <div className = "contest-date">{startTime}　</div>
+          <div className = "contest-date">{koreanTime}　</div>
           <div className = "contest-timer-bar">{this.state.timerBar}</div>
           <div className = "contest-timer">　{this.state.timer}</div>
         </div>
