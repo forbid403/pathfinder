@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import Helmet from 'react-helmet';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import './PopUpPicker.css';
+import searchIcon from '../images/search.png';
 
 export default class PopUpPicker extends React.Component {
   static defaultProps = {
-    numberOfMonths: 2,
+    numberOfMonths: 3,
   };
 
   constructor(props) {
@@ -37,16 +39,24 @@ export default class PopUpPicker extends React.Component {
     return (
       <div className="RangeExample">
         <p>
-          {!from && !to && 'Please select the first day.'}
-          {from && !to && 'Please select the last day.'}
+          {!from && !to && '언제부터 볼까요?'}
+          {from && !to && '언제까지 볼까요?'}
           {from &&
             to &&
-            `Selected from ${from.toLocaleDateString()} to
+            `${from.toLocaleDateString()} - 
                 ${to.toLocaleDateString()}`}{' '}
           {from && to && (
-            <button className="link" onClick={this.handleResetClick}>
-              Reset
+			<Fragment>
+			<img
+				className="search-icon"
+				src = {searchIcon}
+				alt = "search"
+				onClick={this.handleResetClick}
+            />
+            <button className="select-again" onClick={this.handleResetClick}>
+              다시
             </button>
+			</Fragment>
           )}
         </p>
         <DayPicker

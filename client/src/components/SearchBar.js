@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './SearchBar.css';
-import searchIcon from '../images/search.png';
+import searchIcon from '../images/search-title.png';
 import dateIcon from '../images/calendar.png';
 import PopUpPicker from './PopUpPicker';
 

@@ -133,6 +133,13 @@ class Home extends Component {
     this.setState({ currentContests: contests })
   }
 
+  showSearchResult = (keywordFromChild) => {
+    const searchedContests = this.state.contests.filter(contest =>
+      contest.title.toLowerCase().includes(keywordFromChild.target.value.toLowerCase()))
+
+      this.setState({currentContests : searchedContests})
+  }
+
   render() {
     const { currentContests, isLogin } = this.state;
 
@@ -143,7 +150,9 @@ class Home extends Component {
         <Fragment>
           <Logo />
 
-          <SearchBar></SearchBar>
+          <SearchBar
+            showSearchResult = {this.showSearchResult}>
+          </SearchBar>
 
           <Tab
             categories={this.categories}

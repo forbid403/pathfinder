@@ -1,0 +1,17 @@
+.search {
+    border: none;
+    margin-right: 4px;
+    font-size: 12pt;
+}
+
+.search-icon {
+    height: 1.2rem;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.select-again {
+    border: none;
+    font-size: 12pt;
+}
