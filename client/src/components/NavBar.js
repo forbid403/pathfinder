@@ -1,1 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, {Component} from 'react'
+
+class NavBar extends Component{
+    render(){
+        return(<div></div>)
+    }
+}
+export default NavBar
