@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {GoogleLogin} from 'react-google-login'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MyPage from './MyPage/MyPage'
 class Login extends Component{
 
@@ -35,6 +35,7 @@ class Login extends Component{
             {logged === true ?
             <div>
                 Hello! {name}
+                <Link to="/mypage">mypage</Link>
             </div>
             :
             <GoogleLogin
