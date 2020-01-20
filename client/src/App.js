@@ -13,8 +13,7 @@ class App extends Component {
       input: '',
       contests: [],
       currentCategory: '전체',
-      currentContests: [],
-      keyword: ""
+      currentContests: []
     };
 
     this.categories = [
@@ -23,8 +22,6 @@ class App extends Component {
       { id: 2, name: '진행' },
       { id: 3, name: '종료' }
     ];
-
-    this.changeCurrentCategory = this.changeCurrentCategory.bind(this);
   }
 
   componentWillMount() {
@@ -96,7 +93,7 @@ class App extends Component {
     return body;
   }
 
-  firstOrdering()  {
+  firstOrdering() {
     const { contests, currentContests } = this.state;
     const startDate = new Date().getTime();
     let inProgress = [];
@@ -131,6 +128,13 @@ class App extends Component {
     this.setState({currentContests : contests})
   }
 
+  showSearchResult = (keywordFromChild) => {
+    const searchedContests = this.state.contests.filter(contest => 
+      contest.title.toLowerCase().includes(keywordFromChild.target.value.toLowerCase()))
+      
+    this.setState({currentContests : searchedContests})
+  }
+
   render() {
     const { currentContests } = this.state;
 
@@ -138,7 +142,10 @@ class App extends Component {
       <Fragment>
         <Logo/>
 
-        <SearchBar></SearchBar>
+        <SearchBar
+          /*handleSearchTextChange = {this.handleSearchTextChange}*/
+            showSearchResult = {this.showSearchResult}>
+        </SearchBar>
         
         <Tab
           categories={this.categories}

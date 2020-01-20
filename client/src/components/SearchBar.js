@@ -14,13 +14,14 @@ class SearchBar extends Component{
         };
     }
 
-    handleChange(e){
+    handleSearchTextChange = (e) => {
         this.setState({
             [e.target.name]:e.target.value
-        })
-        console.log("@@@ INPUT: " + e);
-    }
+        }) //Stored current input successfully!
 
+        this.props.showSearchResult(e);
+    }
+    
     render()
     {
         return (
@@ -35,7 +36,7 @@ class SearchBar extends Component{
                         className = "search-by-text"
                         value={this.state.keyword}
                         name={'keyword'}
-                        onChange={this.handleChange}>
+                        onChange={this.handleSearchTextChange}>
                     </input>
                 </div>
 
