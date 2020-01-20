@@ -4,6 +4,8 @@ import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import './PopUpPicker.css';
 import searchIcon from '../images/search.png';
+import againIcon from '../images/again.png';
+
 
 export default class PopUpPicker extends React.Component {
   static defaultProps = {
@@ -53,9 +55,12 @@ export default class PopUpPicker extends React.Component {
 				alt = "search"
 				onClick={this.handleResetClick}
             />
-            <button className="select-again" onClick={this.handleResetClick}>
-              다시
-            </button>
+            <img
+				className="again-icon"
+				src = {againIcon}
+				alt = "again"
+				onClick={this.handleResetClick}
+            />
 			</Fragment>
           )}
         </p>

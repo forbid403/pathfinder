@@ -36,7 +36,7 @@ class SearchBar extends Component{
             <div className = "bar">
                 <div className = "search-bar">
                     <img
-                        className = "search-icon"
+                        className = "search-title"
                         src = {searchIcon}
                         alt = "search"
                     />
