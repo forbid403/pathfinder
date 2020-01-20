@@ -40,3 +40,12 @@
 .search-by-text:focus {
     outline: none;
 }
+
+
+.range-picker {
+    display: block;
+}
+
+.range-wrapper {
+    text-align: center;
+}

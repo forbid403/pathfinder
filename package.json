@@ -20,6 +20,7 @@
     "nodemon": "^2.0.2",
     "puppeteer": "^2.0.0",
     "react-create-app": "^2.0.6",
+    "react-date-range": "^1.0.0-beta",
     "react-lines-ellipsis": "^0.14.1",
     "sanitize-html": "^1.21.1",
     "yarn": "^1.21.1"

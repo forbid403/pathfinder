@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import './SearchBar.css';
 import searchIcon from '../images/search.png';
 import dateIcon from '../images/calendar.png';
+import PopUpPicker from './PopUpPicker';
 
 class SearchBar extends Component{
 
@@ -10,7 +11,9 @@ class SearchBar extends Component{
         super(props);
 
         this.state = {
-            keyword: ""
+            keyword: "",
+            showCalendar: false,
+            clicked: false
         };
     }
 
@@ -21,10 +24,15 @@ class SearchBar extends Component{
 
         this.props.showSearchResult(e);
     }
+
+    calendarClicked() {
+        this.setState({showCalendar: true});
+    }
     
     render()
     {
         return (
+        <Fragment>
             <div className = "bar">
                 <div className = "search-bar">
                     <img
@@ -41,11 +49,35 @@ class SearchBar extends Component{
                 </div>
 
                 <img
-                className = "date-icon"
-                src = {dateIcon}
-                alt = "searchByDate"
+                    className = "date-icon"
+                    src = {dateIcon}
+                    alt = "searchByDate"
+                    onClick = {() => {
+                        if (!this.state.clicked)
+                            this.setState({
+                                showCalendar : true,
+                                clicked : true})
+                        else
+                            this.setState({
+                                showCalendar : false,
+                                clicked : false
+                            })
+                    }}
                 />
             </div>
+
+            {
+                this.state.showCalendar?
+                <div
+                    className = "range-wrapper">
+                    <PopUpPicker
+                        className = "range-picker"
+                    ></PopUpPicker>
+                </div>
+                : null
+            }
+
+        </Fragment>
         )
     }
 }
