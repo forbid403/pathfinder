@@ -3,7 +3,7 @@ import Item from './Item';
 
 class ItemList extends Component {
   render() {
-    const { contests, noticeWhenDone } = this.props;
+    const { contests, noticeWhenChanged } = this.props;
     const contestList = contests.map(
       ({ _id, site, title, duration, startTime, num, checked, url, onToggle }) => (
         <Item
@@ -14,14 +14,13 @@ class ItemList extends Component {
           startTime={startTime}
           checked={checked}
           num = {num}
-          noticeWhenDone = {noticeWhenDone}
+          noticeWhenChanged = {noticeWhenChanged}
           onToggle={onToggle}
           url = {url}
           key={_id}
         />
       )
     );
-    console.log(contestList)
 
     return (
       <div>
