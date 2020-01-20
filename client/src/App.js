@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ListTemplate from './components/ListTemplate';
 import ItemList from './components/ItemList';
 import Logo from './components/Logo'
-import NavBar from './components/NavBar'
+import Login from './components/Login'
 import Tab from './components/Tab'
 import SearchBar from './components/SearchBar'
 
@@ -15,8 +15,10 @@ class App extends Component {
       contests: [],
       currentCategory: '전체',
       currentContests: [],
-      keyword: ""
+      keyword: "",
+      isLogin: false
     };
+
 
     this.categories = [
       { id: 0, name: '전체' },
@@ -35,7 +37,7 @@ class App extends Component {
           contests: res,
           currentContests: res
         })
-      
+
         this.firstOrdering()
       })
       .catch(err => console.log(err))
@@ -73,11 +75,10 @@ class App extends Component {
     const { contests } = this.state;
     const contest = contests.find(contest => contest._id === letMeGo);
 
-    if (contest.num < 2)
-    {
+    if (contest.num < 2) {
       const removeHere = contests.indexOf(contest);
       var insertMe = contests.splice(removeHere, 1);
-  
+
       if (command === 0) //in progress
       {
         contests.unshift(contest);
@@ -97,7 +98,7 @@ class App extends Component {
     return body;
   }
 
-  firstOrdering()  {
+  firstOrdering() {
     const { contests, currentContests } = this.state;
     const startDate = new Date().getTime();
     let inProgress = [];
@@ -118,44 +119,46 @@ class App extends Component {
       contests.unshift(contest);
       contest.num = 1;
     })
-    
+
     done.forEach((item) => {
       const contest = contests.find(contest => contest._id === item._id);
-      
+
       const removeHere = contests.indexOf(contest);
       var insertMe = contests.splice(removeHere, 1);
-      
+
       contests.push(contest);
       contest.num = 1;
     })
 
-    this.setState({currentContests : contests})
+    this.setState({ currentContests: contests })
   }
 
   render() {
-    const { currentContests } = this.state;
+    const { currentContests, isLogin } = this.state;
 
     return (
       <div>
-        <NavBar/>
+        <Login logged={isLogin} />
         <Fragment>
-        <Logo/>
+          <Logo />
 
-        <SearchBar></SearchBar>
-        
-        <Tab
-          categories={this.categories}
-          callbackFromParent={this.parentCallback}
-        />
+          <SearchBar></SearchBar>
 
-        <ListTemplate>
-          <ItemList
-            contests={currentContests}
-            noticeWhenChanged={this.noticeWhenChanged}/>
-        </ListTemplate>
-      </Fragment>
+          <Tab
+            categories={this.categories}
+            callbackFromParent={this.parentCallback}
+          />
+
+          <ListTemplate>
+            <ItemList
+              contests={currentContests}
+              noticeWhenChanged={this.noticeWhenChanged} />
+          </ListTemplate>
+        </Fragment>
+
+
       </div>
-      
+
 
     );
   }
