@@ -3,7 +3,7 @@ import ListTemplate from './components/ListTemplate';
 import ItemList from './components/ItemList';
 import Logo from './components/Logo'
 import Tab from './components/Tab'
-
+import SearchBar from './components/SearchBar'
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +13,8 @@ class App extends Component {
       input: '',
       contests: [],
       currentCategory: '전체',
-      currentContests: []
+      currentContests: [],
+      keyword: ""
     };
 
     this.categories = [
@@ -137,6 +138,8 @@ class App extends Component {
       <Fragment>
         <Logo/>
 
+        <SearchBar></SearchBar>
+        
         <Tab
           categories={this.categories}
           callbackFromParent={this.parentCallback}
