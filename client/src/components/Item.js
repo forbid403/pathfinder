@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './Item.css';
-import leet from "../images/LeetCode_name.png"
-import top from "../images/TopCoder_name.png"
-import at from "../images/AtCoder_name.png"
-import leet_gray from "../images/LeetCode_Gray.png"
-import top_gray from "../images/TopCoder_Gray.png"
-import at_gray from "../images/AtCoder_Gray.png"
+import leet from "../images/LeetCode_name.png";
+import top from "../images/TopCoder_name.png";
+import at from "../images/AtCoder_name.png";
+import leet_gray from "../images/LeetCode_Gray.png";
+import top_gray from "../images/TopCoder_Gray.png";
+import at_gray from "../images/AtCoder_Gray.png";
+import like_default from '../images/like_default.png';
+import star_default from '../images/star_default.png';
 
 class Item extends Component {
   constructor(props){
@@ -131,10 +133,24 @@ dateToString(date)
         
         <div className = "contest-time"
         style = {
-          {color: this.state.foregroundColor, backgroundImage: this.state.backgroundImage}}>{duration}h</div>
-        {
-          false && (<div className="check-mark">✓</div>)
-        }
+          {color: this.state.foregroundColor, backgroundImage: this.state.backgroundImage}}>
+            {duration}h
+        </div>
+        <div className="contest-star">
+          <img className = "contest-star-img"
+            src = {star_default}
+            alt = "star"
+            /*onClick={this.handleSearchClick}*/
+          ></img>
+        </div>
+        <div className="contest-like">
+          <img className = "contest-like-img"
+            src = {like_default}
+            alt = "like"
+            /*onClick={this.handleSearchClick}*/
+          ></img>
+        </div>
+        
       </div>
     );
   }
