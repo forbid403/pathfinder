@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {GoogleLogin} from 'react-google-login'
-import { Link } from 'react-router-dom';
-import MyPage from './MyPage/MyPage'
+const mongoose = require('mongoose')
+
 class Login extends Component{
 
     constructor(props){
@@ -10,7 +10,6 @@ class Login extends Component{
             id : '',
             name : '',
             provider : '',
-            logged : this.props.logged
         }
     }
 
@@ -20,8 +19,8 @@ class Login extends Component{
             id : res.googleId,
             name : res.w3.ig,
             provider : 'google',
-            logged : true
         })
+        this.saveSession()
     }
 
     //Login Fail
@@ -29,23 +28,23 @@ class Login extends Component{
         console.error(res)
     }
 
+    //session
+    saveSession = ()=>{
+        const {id, name, provider} = this.state
+        window.sessionStorage.setItem('id', id)
+        window.sessionStorage.setItem('name', name)
+        window.sessionStorage.setItem('provider', provider)
+        this.props.checkLogin()
+    }
+
     render(){
-        const { name, logged } = this.state
         return(<div>
-            {logged === true ?
-            <div>
-                Hello! {name}
-                <Link to="/mypage">mypage</Link>
-            </div>
-            :
             <GoogleLogin
             clientId = '622838244850-puib6rkcqqorg6fvs1lsd74tpr7jcsgn.apps.googleusercontent.com'
             buttonText = "Login"
             onSuccess ={this.responseGoogle}
             onFailure ={this.responseFail}>
             </GoogleLogin>
-            }
-            
             
         </div>)
     }
