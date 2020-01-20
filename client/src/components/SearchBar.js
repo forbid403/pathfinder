@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './SearchBar.css';
-import searchIcon from '../images/search.png';
+import searchIcon from '../images/search-title.png';
 import dateIcon from '../images/calendar.png';
 import PopUpPicker from './PopUpPicker';
 
@@ -22,7 +22,7 @@ class SearchBar extends Component{
             [e.target.name]:e.target.value
         }) //Stored current input successfully!
 
-        this.props.showSearchResult(e);
+        this.props.showTitleSearchResult(e);
     }
 
     calendarClicked() {
@@ -36,7 +36,7 @@ class SearchBar extends Component{
             <div className = "bar">
                 <div className = "search-bar">
                     <img
-                        className = "search-icon"
+                        className = "search-title"
                         src = {searchIcon}
                         alt = "search"
                     />
@@ -72,6 +72,7 @@ class SearchBar extends Component{
                     className = "range-wrapper">
                     <PopUpPicker
                         className = "range-picker"
+                        showDateRangeSearchResult = {this.props.showDateRangeSearchResult}
                     ></PopUpPicker>
                 </div>
                 : null

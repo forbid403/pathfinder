@@ -1,4 +1,25 @@
-.picker {
-    display: block;
-    justify-content: center;
+.search {
+    border: none;
+    margin-right: 4px;
+    font-size: 12pt;
+}
+
+.search-icon {
+    width: auto;
+    height: auto;
+    max-width: 1.3rem;
+    max-height: 1.3rem;
+    margin-left: 5px;
+    margin-right: 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.again-icon {
+    width: auto;
+    height: auto;
+    max-width: 1.1rem;
+    max-height: 1.1rem;
+    display: inline-block;
+    vertical-align: middle;
 }

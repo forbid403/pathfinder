@@ -133,7 +133,24 @@ class Home extends Component {
 
         this.setState({ currentContests: contests })
     }
+    showTitleSearchResult = (keywordFromChild) => {
+        const searchedContests = this.state.contests.filter(contest =>
+            contest.title.toLowerCase().includes(keywordFromChild.target.value.toLowerCase()))
 
+        this.setState({ currentContests: searchedContests })
+    }
+
+    showDateRangeSearchResult = (from, to) => {
+        const fromCompareMe = from.setHours(0, 0, 0, 0);
+        const toCompareMe = to.setHours(0, 0, 0, 0);
+
+        const searchedContests = this.state.contests.filter(contest =>
+            (fromCompareMe <= new Date(contest.startTime).setHours(0, 0, 0, 0))
+            && (new Date(contest.startTime).setHours(0, 0, 0, 0) <= toCompareMe)
+        )
+
+        this.setState({ currentContests: searchedContests })
+    }
     componentDidMount() {
         const id = window.sessionStorage.getItem('id')
         if (id) {
@@ -146,13 +163,13 @@ class Home extends Component {
             isLogin: true
         })
     }
-    onLogOut = () =>{
+    onLogOut = () => {
         this.setState({
-            isLogin : false
+            isLogin: false
         })
         //remove session
         window.sessionStorage.clear()
-        
+
     }
     render() {
         const { currentContests, isLogin } = this.state;
@@ -163,8 +180,10 @@ class Home extends Component {
 
                 <Fragment>
                     <Logo />
-
-                    <SearchBar></SearchBar>
+                    <SearchBar
+                        showTitleSearchResult={this.showTitleSearchResult}
+                        showDateRangeSearchResult={this.showDateRangeSearchResult}>
+                    </SearchBar>
 
                     <Tab
                         categories={this.categories}

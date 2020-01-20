@@ -6,6 +6,7 @@
 
 .search-bar {
     width: 30%;
+    height: 1.6rem;
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
@@ -15,8 +16,11 @@
     border-style: solid;
 }
 
-.search-icon {
-    height: 1.2rem;
+.search-title {
+    width: auto;
+    height: auto;
+    max-width: 20px;
+    max-height: 12px;
     margin-right: 5px;
     display: inline-block;
     vertical-align: middle;
@@ -31,10 +35,12 @@
 
 .search-by-text
 {
-    height: 1.5rem;
-    width: 90%;
+    width: 85%;
+    margin-left: 10px;
     display: inline-block;
     border: none;
+    vertical-align: middle;
+    font-size: 15px;
 }
 
 .search-by-text:focus {
