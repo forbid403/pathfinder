@@ -5,59 +5,66 @@ const contestModel = require('../models/contest')
 const mongoose = require('mongoose')
 const schedule = require('node-schedule');
 
-schedule.scheduleJob('0 10 * * *', ()=>{
+const db = mongoose.connection
+db.once('open', () => { console.log("connected to mongo db") })
+mongoose.connect('mongodb://localhost/pathfinder');
+
+schedule.scheduleJob('0 10 * * *', () => {
     console.log("schedule")
+
     getAtcoder().then(html => {
         console.log("Crawl Atcoder...")
-    
+
         let ulList = []
         let temp = []
         let timeList = []
+        let durationList = []
         let ret = []
         const $ = cheerio.load(html.data)
         const $bodyList = $(".col-sm-8").find(".panel").find(".panel-body")
-    
+
         $bodyList.each((i, elem) => {
             ulList[i] = ($(elem).text())
         })
-    
+
         for (var i = 1; i < $bodyList.length; i++) {
             let strList = ulList[i].split("\n")
-            
+
             temp[i] = new Array()
             for (var j = 2; j < 5; j++) {
                 let data = strList[j].split(": ")
                 temp[i].push(data[1])
             }
-    
+
             let durRet = temp[i][1].split("iso=")
             let durRet2 = durRet[1].split("&")
             timeList[i] = durRet2[0]
+
+            let num = temp[i][2].split(" ")
+            let duration = (num[1] / 60).toString()
+            durationList[i] = duration.substr(0, 3)
         }
-        console.log(timeList)
-    
+
         const $title = $(".col-sm-8").find(".panel")
         $title.each((i, elem) => {
             ret[i] = {
                 title: $(elem).find(".panel-title").text(),
             }
         })
-        
+
         for (var i = 1; i < ret.length; i++) {
-            saveModel("Atcoder", ret[i].title, timeList[i], temp[i][2], temp[i][0])
+            saveModel("Atcoder", ret[i].title, timeList[i], durationList[i], temp[i][0])
         }
         console.log("Atcoder save complete")
-    }).then(()=>getLeetCode())
+    }).then(() => getLeetCode())
 });
-
-const db = mongoose.connection
-db.once('open', () => { console.log("connected to mongo db") })
-mongoose.connect('mongodb://localhost/pathfinder');
 
 const getAtcoder = async () => {
     try { return await axios.get("https://atcoder.jp/") }
     catch (err) { console.log(err) }
 }
+
+
 async function getLeetCode() {
     console.log("Crawl Leetcode...")
     const browser = await puppeteer.launch();
@@ -94,12 +101,13 @@ async function getLeetCode() {
     saveModel("leetcode", title, time, durationRet, contestURL)
     console.log("Leetcode save complete!")
 }
+
 saveModel = (site, title, time, duration, url) => {
     contestModel.create({
         site: site,
         title: title,
         startTime: new Date(time.substring(0, 4), time.substring(4, 6),
-        time.substring(6, 8), time.substring(9, 11), time.substring(11, 13)),
+            time.substring(6, 8), time.substring(9, 11), time.substring(11, 13)),
         duration: duration,
         url: url
     })
@@ -121,7 +129,7 @@ getAtcoder().then(html => {
 
     for (var i = 1; i < $bodyList.length; i++) {
         let strList = ulList[i].split("\n")
-        
+
         temp[i] = new Array()
         for (var j = 2; j < 5; j++) {
             let data = strList[j].split(": ")
@@ -138,7 +146,7 @@ getAtcoder().then(html => {
             title: $(elem).find(".panel-title").text(),
         }
     })
-    
+
     for (var i = 1; i < ret.length; i++) {
         saveModel("Atcoder", ret[i].title, timeList[i], temp[i][2], temp[i][0])
     }
