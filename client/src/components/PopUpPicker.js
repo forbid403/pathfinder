@@ -32,12 +32,28 @@ export default class PopUpPicker extends React.Component {
   }
 
   handleResetClick() {
-    this.setState(this.getInitialState());
+	this.setState(this.getInitialState());
   }
+/*
+  handleSearchTextChange = (e) => {
+	this.setState({
+		[e.target.name]:e.target.value
+	}) //Stored current input successfully!
+
+	this.props.showTitleSearchResult(e);
+}
+*/
+
+  handleSearchClick = () => {
+	  this.props.showDateRangeSearchResult(this.state.from, this.state.to);
+}
 
   render() {
+	
     const { from, to } = this.state;
-    const modifiers = { start: from, end: to };
+	const modifiers = { start: from, end: to };
+	
+	
     return (
       <div className="RangeExample">
         <p>
@@ -53,7 +69,7 @@ export default class PopUpPicker extends React.Component {
 				className="search-icon"
 				src = {searchIcon}
 				alt = "search"
-				onClick={this.handleResetClick}
+				onClick={this.handleSearchClick}
             />
             <img
 				className="again-icon"

@@ -133,11 +133,23 @@ class Home extends Component {
     this.setState({ currentContests: contests })
   }
 
-  showSearchResult = (keywordFromChild) => {
+  showTitleSearchResult = (keywordFromChild) => {
     const searchedContests = this.state.contests.filter(contest =>
       contest.title.toLowerCase().includes(keywordFromChild.target.value.toLowerCase()))
 
       this.setState({currentContests : searchedContests})
+  }
+
+  showDateRangeSearchResult = (from, to) => {
+    const fromCompareMe = from.setHours(0, 0, 0, 0);
+    const toCompareMe = to.setHours(0, 0, 0, 0);
+
+    const searchedContests = this.state.contests.filter(contest =>
+      (fromCompareMe <= new Date(contest.startTime).setHours(0, 0, 0, 0))
+      && (new Date(contest.startTime).setHours(0, 0, 0, 0) <= toCompareMe)
+    )
+
+    this.setState({currentContests : searchedContests})
   }
 
   render() {
@@ -151,7 +163,8 @@ class Home extends Component {
           <Logo />
 
           <SearchBar
-            showSearchResult = {this.showSearchResult}>
+            showTitleSearchResult = {this.showTitleSearchResult}
+            showDateRangeSearchResult = {this.showDateRangeSearchResult}>
           </SearchBar>
 
           <Tab

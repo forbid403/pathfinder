@@ -22,7 +22,7 @@ class SearchBar extends Component{
             [e.target.name]:e.target.value
         }) //Stored current input successfully!
 
-        this.props.showSearchResult(e);
+        this.props.showTitleSearchResult(e);
     }
 
     calendarClicked() {
@@ -72,6 +72,7 @@ class SearchBar extends Component{
                     className = "range-wrapper">
                     <PopUpPicker
                         className = "range-picker"
+                        showDateRangeSearchResult = {this.props.showDateRangeSearchResult}
                     ></PopUpPicker>
                 </div>
                 : null
