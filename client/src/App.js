@@ -24,7 +24,6 @@ class App extends Component {
     ];
 
     this.changeCurrentCategory = this.changeCurrentCategory.bind(this);
-    //this.firstOrdering()
   }
 
   componentWillMount() {
@@ -34,20 +33,15 @@ class App extends Component {
           contests : res,
           currentContests : res
         })
+      
+        this.firstOrdering()
       })
       .catch(err => console.log(err))
-
-    this.firstOrdering()
   }
 
   changeCurrentCategory = (selectedCategory) => {
     const { contests } = this.state;
     const category = this.categories.find(category => category.id === selectedCategory);
-    /*{ id: 0, name: '전체' },
-    { id: 1, name: '예정' },
-    { id: 2, name: '진행' },
-    { id: 3, name: '종료' }*/
-
     let startDate = new Date().getTime()
     let filtered = []
 
@@ -72,34 +66,10 @@ class App extends Component {
     this.changeCurrentCategory(dataFromChild)
   }
 
-  changeOrderOfList(command, letMeGo, num) {
-    const { contests } = this.state;
-    const contest = contests.find(contest => contest.id === letMeGo);
-
-    if (contest.num < 2)
-    {
-      const removeHere = contests.indexOf(contest);
-      var insertMe = contests.splice(removeHere, 1);
-  
-      if (command === 0) //in progress
-      {
-        contests.unshift(contest);
-        contest.num = 1;
-      }
-      else //done
-      {
-        contests.push(contest);
-        contest.num = 2;
-      }
-    }
-  }
-
   noticeWhenChanged = (command, letMeGo, num) => {
     /*changeOrderOfList(command, letMeGo, num)*/
     const { contests } = this.state;
     const contest = contests.find(contest => contest._id === letMeGo);
-    console.log("LETMEGO: " + letMeGo)
-    console.log("NOTICE: " + contest.title + ", " + contest.num)
 
     if (contest.num < 2)
     {
@@ -126,9 +96,8 @@ class App extends Component {
   }
 
   firstOrdering()  {
-    const { contests } = this.state;
+    const { contests, currentContests } = this.state;
     const startDate = new Date().getTime();
-
     let inProgress = [];
     let done = [];
 
@@ -139,12 +108,26 @@ class App extends Component {
       (new Date(contest.startTime.slice(0, -1)).getTime() - startDate < (parseFloat(contest.duration) * (-1) * 1000 * 60 * 60)))
 
     inProgress.forEach((item) => {
-      this.noticeWhenChanged(0, item.id, item.num)
+      const contest = contests.find(contest => contest._id === item._id);
+
+      const removeHere = contests.indexOf(contest);
+      var insertMe = contests.splice(removeHere, 1);
+
+      contests.unshift(contest);
+      contest.num = 1;
     })
     
     done.forEach((item) => {
-      this.noticeWhenChanged(1, item.id, item.num)
+      const contest = contests.find(contest => contest._id === item._id);
+      
+      const removeHere = contests.indexOf(contest);
+      var insertMe = contests.splice(removeHere, 1);
+      
+      contests.push(contest);
+      contest.num = 1;
     })
+
+    this.setState({currentContests : contests})
   }
 
   render() {
