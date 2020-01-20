@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ListTemplate from './components/ListTemplate';
 import ItemList from './components/ItemList';
 import Logo from './components/Logo'
+import NavBar from './components/NavBar'
 import Tab from './components/Tab'
 
 
@@ -31,9 +32,9 @@ class App extends Component {
   componentWillMount() {
     this.callApi()
       .then(res => {
-        this.setState({ 
-          contests : res,
-          currentContests : res
+        this.setState({
+          contests: res,
+          currentContests: res
         })
       })
       .catch(err => console.log(err))
@@ -76,8 +77,7 @@ class App extends Component {
     const { contests } = this.state;
     const contest = contests.find(contest => contest.id === letMeGo);
 
-    if (contest.num === 0)
-    {
+    if (contest.num === 0) {
       const removeHere = contests.indexOf(contest);
       var insertMe = contests.splice(removeHere, 1);
 
@@ -105,20 +105,24 @@ class App extends Component {
     const { currentContests } = this.state;
 
     return (
-      <Fragment>
-        <Logo />
+      <div>
+        <NavBar />
+        <Fragment>
+          <Logo />
 
-        <Tab
-          categories={this.categories}
-          callbackFromParent={this.parentCallback}
-        />
+          <Tab
+            categories={this.categories}
+            callbackFromParent={this.parentCallback}
+          />
 
-        <ListTemplate>
-          <ItemList
-            contests={currentContests}
-            noticeWhenDone={this.noticeWhenDone}/>
-        </ListTemplate>
-      </Fragment>
+          <ListTemplate>
+            <ItemList
+              contests={currentContests}
+              noticeWhenDone={this.noticeWhenDone} />
+          </ListTemplate>
+        </Fragment>
+
+      </div>
 
     );
   }
