@@ -5,6 +5,7 @@ const db = mongoose.connection
 const app = express()
 const port = process.env.PORT || 5000
 const contests = require('./models/contest')
+const user = require('./models/User')
 db.once('open', () => { console.log("connected to mongo db") })
 mongoose.connect('mongodb://localhost/pathfinder');
 
@@ -15,6 +16,17 @@ app.get('/api/getcontestdata', (req, res) => {
         res.send(contest)
     })
 });
+
+app.post('/api/signin', (req, res)=>{
+    user.create({
+        id : req.body.id,
+        name : req.body.name,
+        provider : req.body.provider,
+        star : new Array,
+        thumbsUp : new Array
+    })
+    res.json({result : 1})
+})
 
 db.once('open', ()=>{console.log("connected to mongo db")})
 mongoose.connect('mongodb://localhost/pathfinder');
