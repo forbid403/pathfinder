@@ -49,6 +49,10 @@ class MyPage extends Component{
         this.setState({selectedContests : filtered})
     }
 
+    contactUs() {
+        
+    }
+
     render(){
         const {staredContests} = this.state;
         let modifiers = {
@@ -83,7 +87,8 @@ class MyPage extends Component{
                         alt = "logo"
                         />
                     <div
-                        className = "contact-us">
+                        className = "contact-us"
+                        onClick={this.contactUs}>
                         Contact Us
                     </div>
                 </div>
