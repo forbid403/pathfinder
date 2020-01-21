@@ -7,11 +7,14 @@ const port = process.env.PORT || 5000
 const contests = require('./models/contest')
 const user = require('./models/User')
 const objId = mongoose.Types.ObjectId
+
 db.once('open', () => { console.log("connected to mongo db") })
 mongoose.connect('mongodb://localhost/pathfinder');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+
 app.get('/api/getcontestdata', (req, res) => {
     contests.find().sort({ 'startTime': -1 }).exec((err, contest) => {
         res.send(contest)
@@ -114,7 +117,6 @@ app.post('/api/star/add', (req, res) => {
         }
     )
 })
-
 
 app.post('/api/star/cancle', (req, res) => {
     const contestId = new objId(req.body.contestId)
