@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import MyStarList from './MyStarList';
+import MyLikeList from './MyLikeList';
 import DayPicker from 'react-day-picker';
 import logo from '../../images/logo_black.png';
 import tmp_profile from '../../images/tmp_google_image.png';
@@ -12,48 +13,20 @@ class MyPage extends Component{
     constructor(props) {
         super(props);
 
+        this.handleDayClick = this.handleDayClick.bind(this);
+
         this.state = {
-            currentContests: []
-        }
+            currentContests: [],
+            selectedDay: undefined
+        };
     }
 
-    callApi = async () => {
-        const response = await fetch('api/getcontestdata');
-        const body = await response.json();
-        return body;
+    handleDayClick(day) {
+        console.log("@@@ " + day)
+        this.setState({selectedDay : day})
     }
 
-    componentWillMount() {
-        this.callApi()
-            .then(res => {
-                this.setState({
-                    currentContests: res
-                })
-            })
-            .catch(err => console.log(err))
-    }
-
-
-    StylingInline() {
-        const modifiers = {
-            thursdays: { daysOfWeek: [4] },
-            birthday: new Date(2018, 9, 30),
-          };
-          const modifiersStyles = {
-            birthday: {
-              color: 'white',
-              backgroundColor: '#ffc107',
-            },
-            thursdays: {
-              color: '#ffc107',
-              backgroundColor: '#fffdee',
-            },
-          };    
-    }
-    
     render(){
-        const {modifiers, modifiersStyles} = this;
-        const {currentContests} = this.state;
         return(
             <div>
                 <div className = "mypage-header-wrapper">
@@ -97,12 +70,21 @@ class MyPage extends Component{
                     <div className = "mypage-star-calendar">
                         <DayPicker
                             month={new Date()}
-                            modifiers={modifiers}
-                            modifiersStyles={modifiersStyles}/>
+                            onDayClick={this.handleDayClick}
+                            selectedDays={this.state.selectedDay}/>
                     </div>
                     <div className = "mypage-star-list-wrapper">
-                        <MyStarList>
-                        </MyStarList>
+                        {
+                            this.state.selectedDay ? (  
+                                <div>    
+                                <div className = "mypage-calendar-picked-date">
+                                {this.state.selectedDay.toLocaleDateString()}
+                                </div>
+                                    <MyStarList>
+                                    </MyStarList>
+                                </div>
+                            ) : <div>날짜를 선택하세요.</div>
+                        }
                     </div>
                 </div>
             </div>
@@ -119,8 +101,8 @@ class MyPage extends Component{
 
                 <div className = "mypage-like-wrapper">
                     <div className = "mypage-like-list-wrapper">
-                        <MyStarList>
-                        </MyStarList>
+                        <MyLikeList>
+                        </MyLikeList>
                     </div>
                 </div>
             

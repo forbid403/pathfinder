@@ -15,7 +15,7 @@
     height: 1.4rem;
     padding: 0.8rem;
     text-align: center;
-    margin-left: 0.5    rem;
+    margin-left: 0.5rem;
     float: left;
 }
 
@@ -63,6 +63,14 @@
     text-align: center;
     display: block;
     float: left;
+}
+
+.mypage-calendar-picked-date {
+    text-align: left;
+    width: 80%;
+    margin-left: 2rem;
+    margin-bottom: 20px;
+    margin-top: 16px;
 }
 
 .mypage-like-title {
