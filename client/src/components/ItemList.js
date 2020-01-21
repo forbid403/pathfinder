@@ -6,7 +6,7 @@ class ItemList extends Component {
   render() {
     const { contests, noticeWhenChanged } = this.props;
     const contestList = contests.map(
-      ({ _id, site, title, duration, startTime, num, checked, url, onToggle, isThumbsUp }) => (
+      ({ _id, site, title, duration, startTime, num, checked, url, onToggle }) => (
         <Item
           _id={_id}
           site={site}
@@ -19,7 +19,6 @@ class ItemList extends Component {
           onToggle={onToggle}
           url={url}
           key={_id}
-          isThumbsUp = {isThumbsUp}
         />
       )
     );

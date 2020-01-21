@@ -39,12 +39,12 @@ app.post('/api/thumbsup', (req, res) => {
         })
 })
 
-app.post('/api/thumbsup/add', (req, res) => {    
+app.post('/api/thumbsup/add', (req, res) => {
     const contestId = new objId(req.body.contestId)
     const id = req.body.id
     //해당 contest에 따봉 1 추가
     contests.findOneAndUpdate(
-        { "_id" : contestId },
+        { "_id": contestId },
         { $inc: { thumbsup: 1 } },
         (err, data) => {
             if (err) { console.log("/api/thumbsup/add contest", err); return; }
@@ -56,7 +56,7 @@ app.post('/api/thumbsup/add', (req, res) => {
             { "id": id },
             { $addToSet: { thumbsUp: contestId } },
             (err, data) => {
-                if (err) { console.log("/api/thumbsup/add user", err); res.json({ret : 0}); }
+                if (err) { console.log("/api/thumbsup/add user", err); res.json({ ret: 0 }); }
                 res.json({ ret: 1 })
             }
         )
@@ -69,7 +69,7 @@ app.post('/api/thumbsup/cancle', (req, res) => {
     const id = req.body.id
     //해당 contest에 따봉 1 삭제
     contests.findOneAndUpdate(
-        { "_id" : contestId, "thumsup" : {"$lt" : 0}},
+        { "_id": contestId, "thumsup": { "$lt": 0 } },
         { $inc: { thumbsup: -1 } },
         (err, data) => {
             if (err) { console.log("/api/thumbsup/cancle contest", err); return; }
@@ -81,13 +81,56 @@ app.post('/api/thumbsup/cancle', (req, res) => {
             { "id": id },
             { $pull: { thumbsUp: contestId } },
             (err, data) => {
-                if (err) { console.log("/api/thumbsup/add user", err); res.json({ret : 0}); }
+                if (err) { console.log("/api/thumbsup/add user", err); res.json({ ret: 0 }); }
                 res.json({ ret: 1 })
             }
         )
 
     })
 })
+
+app.post('/api/star', (req, res) => {
+    user.find().where('id').equals(req.body.id)
+        .where('star').equals(new objId(req.body.contestId)).exec((err, ret) => {
+            if (err) { console.log("/api/star", err); return; }
+
+            if (ret.length > 0) res.json({ ret: 1 });
+            else res.json({ ret: 0 });
+        })
+})
+
+app.post('/api/star/add', (req, res) => {
+    const contestId = new objId(req.body.contestId)
+    const id = req.body.id
+
+    //user에 star 한 contest의 id 추가
+    user.findOneAndUpdate(
+        { "id": id },
+        { $addToSet: { star: contestId } },
+        (err, data) => {
+            if (err) { console.log("/api/star/add user", err); res.json({ ret: 0 }); }
+            res.json({ ret: 1 })
+        }
+    )
+})
+
+
+app.post('/api/star/cancle', (req, res) => {
+    const contestId = new objId(req.body.contestId)
+    const id = req.body.id
+    console.log("/api/star/cancle user In")
+    //user에 star 한 contest의 id 삭제
+    user.findOneAndUpdate(
+        { "id": id },
+        { $pull: { star: contestId } },
+        (err, data) => {
+            if (err) { console.log("/api/star/cancle user", err); res.json({ ret: 0 }); }
+            res.json({ ret: 1 })
+        }
+    )
+
+})
+
 
 db.once('open', () => { console.log("connected to mongo db") })
 mongoose.connect('mongodb://localhost/pathfinder');

@@ -85,6 +85,80 @@ class Item extends Component {
     }
   }
 
+  checkStar = async () => {
+    const id = window.sessionStorage.getItem('id')
+    if (id) {
+      const data = {
+        id: id,
+        contestId: this.props._id
+      }
+      const response = await fetch('api/star/', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      const body = await response.json();
+      if(body.ret){
+        this.setState({
+          isStar : true
+        })
+      }
+    }
+  }
+
+  addStar = async () =>{
+    const id = window.sessionStorage.getItem('id')
+    if (id) {
+      const data = {
+        id: id,
+        contestId: this.props._id
+      }
+      const response = await fetch('api/star/add', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      const body = await response.json();
+
+      if(body.ret){
+        this.setState({
+          isStar : true
+        })
+      }
+    }
+  }
+
+  cancleStar = async()=>{
+    const id = window.sessionStorage.getItem('id')
+    if (id) {
+      const data = {
+        id: id,
+        contestId: this.props._id
+      }
+      const response = await fetch('api/star/cancle', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      const body = await response.json();
+
+      if(body.ret){
+        this.setState({
+          isStar : false
+        })
+      }
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -97,9 +171,10 @@ class Item extends Component {
       foregroundColor: "#000000",
       done: false,
       isThumbsup: false,
-    }    
+      isStar : false
+    }
+    this.checkStar()
     this.checkThumbsup()
-
   }
 
   componentDidMount() {
@@ -171,6 +246,14 @@ class Item extends Component {
       //add thumbsup
       this.addThumbsUp()
   }
+  handleStarClick = () => {
+    this.state.isStar ?
+      //cancle thumbsup
+      this.cancleStar()
+      :
+      //add thumbsup
+      this.addStar()
+  }
   
   dateToString(date) {
     const year = date.getFullYear();
@@ -195,7 +278,7 @@ class Item extends Component {
 
   render() {
     const { image, title, duration, startTime, checked, url, _id, onToggle } = this.props;
-    const { isThumbsup, backgroundImage, foregroundColor } = this.state
+    const { isThumbsup, isStar, backgroundImage, foregroundColor } = this.state
     const tmp_koreanTime = new Date(startTime.slice(0, -1));
     const koreanTime = this.dateToString(tmp_koreanTime);
 
@@ -224,9 +307,9 @@ class Item extends Component {
         </div>
         <div className="contest-star">
           <img className="contest-star-img"
-            src={star_default}
+            src={isStar ? star_default : ""}
             alt="star"
-          //onClick={this.handleStarClick}
+            onClick={this.handleStarClick}
           ></img>
         </div>
         <div className="contest-like">
