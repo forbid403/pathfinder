@@ -7,7 +7,9 @@ import leet_gray from "../images/LeetCode_Gray.png";
 import top_gray from "../images/TopCoder_Gray.png";
 import at_gray from "../images/AtCoder_Gray.png";
 import like_default from '../images/like_default.png';
+import like_color from '../images/like_color.png';
 import star_default from '../images/star_default.png';
+import star_color from '../images/star_yellow.png';
 
 class Item extends Component {
 
@@ -284,8 +286,7 @@ class Item extends Component {
 
     return (
       <div className="contest-item"
-        style={{ background: this.state.backgroundColor }}
-        onClick={() => { window.open(url) }}>
+        style={{ background: this.state.backgroundColor }}>
 
         <div className="web-image">
           <img src={this.state.source} /*{source}*/
@@ -293,33 +294,39 @@ class Item extends Component {
             className="center" />
         </div>
 
-        <div className="contest-name" style={{ color: this.state.foregroundColor }}>
-          <div>{title}</div>
+        <div className="contest-name"
+              style={{ color: this.state.foregroundColor }}>
+          <div
+              onClick={() => { window.open(url) }}>{title}</div>
           <div className="contest-date">{koreanTime}　</div>
           <div className="contest-timer-bar">{this.state.timerBar}</div>
           <div className="contest-timer">　{this.state.timer}</div>
         </div>
 
+      <div className = "contest-icons-wrapper">
         <div className="contest-time"
-          style={
-            { color: foregroundColor, backgroundImage: backgroundImage }}>
-          {duration}h
-        </div>
-        <div className="contest-star">
-          <img className="contest-star-img"
-            src={isStar ? star_default : ""}
-            alt="star"
-            onClick={this.handleStarClick}
-          ></img>
-        </div>
-        <div className="contest-like">
-          <img className="contest-like-img"
-            src={isThumbsup ? like_default : ""}
-            alt="like"
-            onClick={this.handleThumbsupClick}
-          ></img>
-        </div>
+            style={
+              { color: foregroundColor, backgroundImage: backgroundImage }}>
+            {duration}h
+          </div>
 
+          <div className="contest-star">
+            <img className="contest-star-img"
+              src={isStar ? star_default : star_color}
+              alt="star"
+              onClick={this.handleStarClick}
+            ></img>
+          </div>
+
+          <div className="contest-like">
+            <img className="contest-like-img"
+              src={isThumbsup ? like_default : like_color}
+              alt="like"
+              onClick={this.handleThumbsupClick}
+            ></img>
+          </div>
+      </div>
+        
       </div>
     );
   }

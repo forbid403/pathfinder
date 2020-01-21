@@ -11,9 +11,7 @@ const App = () => {
         <switch>
           <Route exact path="/" component={Home}></Route>
           <Route path="/mypage" component={MyPage}></Route>
-
         </switch>
-
       </div>
     </Router>
   )
