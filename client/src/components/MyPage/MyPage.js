@@ -9,6 +9,7 @@ import star from '../../images/star_yellow.png'
 import like from '../../images/like_color.png'
 import "./MyPage.css"
 import 'react-day-picker/lib/style.css';
+import {useHistory} from 'react-router-dom'
 
 class MyPage extends Component {
 
@@ -165,6 +166,7 @@ class MyPage extends Component {
                     <img
                         className="logo-mini"
                         src={logo}
+                        onClick = {()=>this.props.history.push("/")}
                         alt="logo" />
                     <div
                         className="contact-us">
