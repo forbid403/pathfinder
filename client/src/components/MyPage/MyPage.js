@@ -107,10 +107,6 @@ class MyPage extends Component{
                          style = {{display: "inline"}}>
                     표시한 콘테스트: {this.state.staredContests.length}개
                     </div>
-                    <div className = "mypage-star-alarm"
-                         style = {{display: "inline", float: "right"}}>
-                    알림 받기　
-                    </div>
                 </div>
 
                 <div className = "mypage-star-wrapper">
