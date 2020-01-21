@@ -26,15 +26,22 @@ class MyPage extends Component{
                 {site:"Topcoder", title:"Ha HA AHAHA HA HA HA HA HA HA", startTime:new Date("2020-01-10 12:00:00"), duration:"2.0", url:"http://www.google.com"},
             ],
             selectedDay: undefined,
-            selectedContest: []
+            selectedContests: []
         };
     }
 
     handleDayClick(day) {
-        this.setState({selectedDay : day})
+        const {likedContests} = this.state;
 
-        
+        this.setState({selectedDay : day});
 
+        let filtered = [];
+        const selected = new Date(day).setHours(0, 0, 0, 0);
+        filtered = likedContests.filter(contest =>
+            new Date(contest.startTime).setHours(0, 0, 0, 0)   
+                === selected);
+    
+        this.setState({selectedContests : filtered})
     }
 
     render(){
@@ -93,7 +100,7 @@ class MyPage extends Component{
                                 </div>
                                 <StarListTemplate>
                                     <StarItemList
-                                        contests={this.state.likedContests} />
+                                        contests={this.state.selectedContests} />
                                 </StarListTemplate>
                                 </div>
                             ) : <div>날짜를 선택하세요.</div>
