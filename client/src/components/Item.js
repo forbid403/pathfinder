@@ -312,7 +312,7 @@ class Item extends Component {
 
           <div className="contest-star">
             <img className="contest-star-img"
-              src={isStar ? star_default : star_color}
+              src={isStar ? star_color : star_default}
               alt="star"
               onClick={this.handleStarClick}
             ></img>
@@ -320,7 +320,7 @@ class Item extends Component {
 
           <div className="contest-like">
             <img className="contest-like-img"
-              src={isThumbsup ? like_default : like_color}
+              src={isThumbsup ? like_color : like_default}
               alt="like"
               onClick={this.handleThumbsupClick}
             ></img>
