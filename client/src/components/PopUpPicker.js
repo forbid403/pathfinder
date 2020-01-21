@@ -34,16 +34,7 @@ export default class PopUpPicker extends React.Component {
   handleResetClick() {
 	this.setState(this.getInitialState());
   }
-/*
-  handleSearchTextChange = (e) => {
-	this.setState({
-		[e.target.name]:e.target.value
-	}) //Stored current input successfully!
-
-	this.props.showTitleSearchResult(e);
-}
-*/
-
+  
   handleSearchClick = () => {
 	  this.props.showDateRangeSearchResult(this.state.from, this.state.to);
 }
@@ -65,17 +56,12 @@ export default class PopUpPicker extends React.Component {
                 ${to.toLocaleDateString()}`}{' '}
           {from && to && (
 			<Fragment>
-			{/* <img
+			<img
 				className="search-icon"
 				src = {searchIcon}
 				alt = "search"
 				onClick={this.handleSearchClick}
-            /> */}
-      <div
-				className="search-icon"
-				onClick={this.handleSearchClick}>
-        찾기!
-      </div>
+            />
             <img
 				className="again-icon"
 				src = {againIcon}

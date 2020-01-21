@@ -80,7 +80,8 @@ class MyPage extends Component{
                     <img
                         className = "logo-mini"
                         src = {logo}
-                        alt = "logo"/>
+                        alt = "logo"
+                        />
                     <div
                         className = "contact-us">
                         Contact Us
