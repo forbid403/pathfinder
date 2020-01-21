@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-//import MyStarList from './MyStarList';
-//import MyLikeList from './MyLikeList';
+import StarItemList from './StarItemList';
+import StarListTemplate from './StarListTemplate'
 import DayPicker from 'react-day-picker';
 import logo from '../../images/logo_black.png';
 import tmp_profile from '../../images/tmp_google_image.png';
@@ -16,15 +16,15 @@ class MyPage extends Component{
         this.handleDayClick = this.handleDayClick.bind(this);
 
         this.state = {
-            // likedContests: [
-            //     {_id=0, num=0, site="Atcoder", title="Go To Google", startTime=new Date("2020-01-12 12:00:00"), duration="2.0", url="http://www.google.com"},
-            //     {_id=1, num=0, site="Atcoder", title="Wow But I'm Okay Naver", startTime=new Date("2020-01-15 12:00:00"), duration="2.0", url="http://www.naver.com"},
-            //     {_id=2, num=0, site="Topcoder", title="Pan Pineapple Pinapple Pan Daum", startTime=new Date("2020-01-20 12:00:00"), duration="2.0", url="http://www.daum.net"},
-            //     {_id=3, num=0, site="Leetcode", title="Junior Contest 2020 Jan", startTime=new Date("2019-12-31 12:00:00"), duration="2.0", url="http://www.google.com"},
-            //     {_id=4, num=0, site="Leetcode", title="Weekly 124 Contest", startTime=new Date("2020-01-30 12:00:00"), duration="2.0", url="http://www.google.com"},
-            //     {_id=5, num=0, site="Atcoder", title="I Love Algorithm", startTime=new Date("2020-01-25 13:00:00"), duration="2.0", url="http://www.google.com"},
-            //     {_id=6, num=0, site="Topcoder", title="Ha HA AHAHA HA HA HA HA HA HA", startTime=new Date("2020-01-10 12:00:00"), duration="2.0", url="http://www.google.com"},
-            // ],
+            likedContests: [
+                {site:"Atcoder", title:"Go To Google", startTime:new Date("2020-01-12 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Atcoder", title:"Wow But I'm Okay Naver", startTime:new Date("2020-01-15 12:00:00"), duration:"2.0", url:"http://www.naver.com"},
+                {site:"Topcoder", title:"Pan Pineapple Pinapple Pan Daum", startTime:new Date("2020-01-20 12:00:00"), duration:"2.0", url:"http://www.daum.net"},
+                {site:"Leetcode", title:"Junior Contest 2020 Jan", startTime:new Date("2019-12-31 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Leetcode", title:"Weekly 124 Contest", startTime:new Date("2020-01-30 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Atcoder", title:"I Love Algorithm", startTime:new Date("2020-01-25 13:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Topcoder", title:"Ha HA AHAHA HA HA HA HA HA HA", startTime:new Date("2020-01-10 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+            ],
             selectedDay: undefined,
             selectedContest: []
         };
@@ -33,6 +33,7 @@ class MyPage extends Component{
     handleDayClick(day) {
         this.setState({selectedDay : day})
 
+        
 
     }
 
@@ -88,10 +89,12 @@ class MyPage extends Component{
                             this.state.selectedDay ? (  
                                 <div>    
                                 <div className = "mypage-calendar-picked-date">
-                                {this.state.selectedDay.toLocaleDateString()}
+                                    {this.state.selectedDay.toLocaleDateString()}
                                 </div>
-                                    {/* <MyStarList>
-                                    </MyStarList> */}
+                                <StarListTemplate>
+                                    <StarItemList
+                                        contests={this.state.likedContests} />
+                                </StarListTemplate>
                                 </div>
                             ) : <div>날짜를 선택하세요.</div>
                         }
@@ -111,8 +114,6 @@ class MyPage extends Component{
 
                 <div className = "mypage-like-wrapper">
                     <div className = "mypage-like-list-wrapper">
-                        {/* <MyLikeList>
-                        </MyLikeList> */}
                     </div>
                 </div>
             
