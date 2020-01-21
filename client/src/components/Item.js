@@ -220,8 +220,8 @@ class Item extends Component {
           this.setState({ foregroundColor: "#868e96" })
           this.setState({ backgroundImage: "url('images/hourBackground.png')" })
 
-          if (this.props.image === 0) { this.setState({ source: leet_gray }) }
-          else if (this.props.image === 1) { this.setState({ source: top_gray }) }
+          if (this.props.site === "Leetcode") { this.setState({ source: leet_gray }) }
+          else if (this.props.site === "Topcoder") { this.setState({ source: top_gray }) }
           else { this.setState({ source: at_gray }) }
 
           //notice to 'App.js' so that it can change the order of the full list.
