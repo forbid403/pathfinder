@@ -20,13 +20,14 @@ class MyPage extends Component{
                 {site:"Atcoder", title:"Go To Google", startTime:new Date("2020-01-12 12:00:00"), duration:"2.0", url:"http://www.google.com"},
                 {site:"Atcoder", title:"Wow But I'm Okay Naver", startTime:new Date("2020-01-15 12:00:00"), duration:"2.0", url:"http://www.naver.com"},
                 {site:"Topcoder", title:"Pan Pineapple Pinapple Pan Daum", startTime:new Date("2020-01-20 12:00:00"), duration:"2.0", url:"http://www.daum.net"},
-                {site:"Leetcode", title:"Junior Contest 2020 Jan", startTime:new Date("2019-12-31 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Leetcode", title:"Junior Contest 2020 Jan", startTime:new Date("2020-01-31 12:00:00"), duration:"2.0", url:"http://www.google.com"},
                 {site:"Leetcode", title:"Weekly 124 Contest", startTime:new Date("2020-01-30 12:00:00"), duration:"2.0", url:"http://www.google.com"},
                 {site:"Atcoder", title:"I Love Algorithm", startTime:new Date("2020-01-25 13:00:00"), duration:"2.0", url:"http://www.google.com"},
-                {site:"Topcoder", title:"Ha HA AHAHA HA HA HA HA HA HA", startTime:new Date("2020-01-10 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Topcoder", title:"But I Love Chicken More", startTime:new Date("2020-01-10 12:00:00"), duration:"2.0", url:"http://www.google.com"},
             ],
             selectedDay: undefined,
-            selectedContests: []
+            selectedContests: [],
+            now: new Date(2020, 1)
         };
     }
 
@@ -34,17 +35,42 @@ class MyPage extends Component{
         const {likedContests} = this.state;
 
         this.setState({selectedDay : day});
-
+        
         let filtered = [];
         const selected = new Date(day).setHours(0, 0, 0, 0);
+        console.log(new Date(day))
         filtered = likedContests.filter(contest =>
             new Date(contest.startTime).setHours(0, 0, 0, 0)   
-                === selected);
-    
+               === selected);
+               
         this.setState({selectedContests : filtered})
     }
 
     render(){
+        const {likedContests} = this.state;
+        let modifiers = {
+            colorMe: [],
+        };
+        
+        for (let i in likedContests)
+        {
+            const contest = likedContests[i];
+            const date = new Date(contest.startTime);
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const day = date.getDate();
+
+            const insertMe = new Date(year, month, day);
+            modifiers.colorMe.push(insertMe);
+        }
+
+        const modifiersStyles = {
+            colorMe: {
+                color: 'white',
+                backgroundColor: '#ffc107',
+            },
+        };
+
         return(
             <div>
                 <div className = "mypage-header-wrapper">
@@ -76,7 +102,7 @@ class MyPage extends Component{
                         alt = "star"/>
                     <div clssName = "mypage-star-text"
                          style = {{display: "inline"}}>
-                    표시한 콘테스트: n개
+                    표시한 콘테스트: {this.state.likedContests.length}개
                     </div>
                     <div className = "mypage-star-alarm"
                          style = {{display: "inline", float: "right"}}>
@@ -87,9 +113,11 @@ class MyPage extends Component{
                 <div className = "mypage-star-wrapper">
                     <div className = "mypage-star-calendar">
                         <DayPicker
-                            month={new Date()}
+                            month={new Date(2019, 12)}
                             onDayClick={this.handleDayClick}
-                            selectedDays={this.state.selectedDay}/>
+                            selectedDays={this.state.selectedDay}
+                            modifiers={modifiers}
+                            modifiersStyles={modifiersStyles}/>
                     </div>
                     <div className = "mypage-star-list-wrapper">
                         {
