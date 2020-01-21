@@ -62,7 +62,7 @@ class Login extends Component {
             <GoogleLogin
                 type="submit"
                 clientId='622838244850-puib6rkcqqorg6fvs1lsd74tpr7jcsgn.apps.googleusercontent.com'
-                buttonText="Login"
+                buttonText="로그인"
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseFail}>
             </GoogleLogin>

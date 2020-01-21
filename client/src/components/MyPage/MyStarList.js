@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './MyStarList.css';
 
-const MyStarList = ({form, children}) => {
+const MyStarList = ({children}) => {
     return (
         <section className = "star-list-wrapper">
-            HI
+            {children}
         </section>
     );
 };
