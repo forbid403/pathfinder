@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Login from '../Login'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {GoogleLogout} from 'react-google-login'
 
 class Header extends Component {
@@ -11,6 +11,7 @@ class Header extends Component {
 
     onLogoutSuccess = ()=>{
         this.props.onLogOut()
+        window.location.reload()
     }
     onFailure = (res)=>{
         console.error(res)

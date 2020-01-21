@@ -171,6 +171,7 @@ class Item extends Component {
       //add thumbsup
       this.addThumbsUp()
   }
+  
   dateToString(date) {
     const year = date.getFullYear();
 
