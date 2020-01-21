@@ -1,0 +1,94 @@
+.mypage-header-wrapper {
+    height: 3rem;
+    padding-right: 2rem;
+    background-color: #f8f9fa;
+}
+
+.logo-mini {
+    height: 3rem;
+    float: left;
+    margin-left: 10px;
+}
+
+.contact-us {
+    width: fit-content;
+    height: 1.4rem;
+    padding: 0.8rem;
+    text-align: center;
+    margin-left: 0.5    rem;
+    float: left;
+}
+
+.mypage-profile {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.mypage-star-wrapper {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mypage-star-title {
+    width: 60%;
+    height: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 0.2rem;
+    background-color: #fff3bf;
+}
+
+.mypage-star-icon {
+    height: 0.9rem;
+    margin-right: 5px;
+    margin-left: 0.5rem;
+}
+
+.mypage-star-calendar {
+    width: 40%;
+    height: 16rem;
+    display: block;
+    float:left;
+    background-color: white;
+}
+
+.mypage-star-list-wrapper {
+    background-color: #fff9db;
+    width: 60%;
+    height: 16rem;
+    text-align: center;
+    display: block;
+    float: left;
+}
+
+.mypage-like-title {
+    width: 60%;
+    height: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20rem;
+    margin-bottom: 0.2rem;
+    background-color: #e7f3fc;
+}
+
+.mypage-like-wrapper {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mypage-like-list-wrapper {
+    background-color: #f5f8fa;
+    width: 100%;
+    height: 12rem;
+    text-align: center;
+    display: block;
+    float: left;
+    margin-bottom: 5rem;
+}

@@ -176,7 +176,10 @@ class Home extends Component {
 
         return (
             <div>
-                <Header isLogin={isLogin} onLogin={this.onLogin} onLogOut={this.onLogOut} />
+                <Header
+                    isLogin={isLogin} 
+                    onLogin={this.onLogin}
+                    onLogOut={this.onLogOut} />
 
                 <Fragment>
                     <Logo />

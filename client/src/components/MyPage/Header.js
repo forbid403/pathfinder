@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import Login from '../Login'
 import {Link} from 'react-router-dom'
-import {GoogleLogout} from 'react-google-login'
+import {GoogleLogout, /*GoogleAuth*/} from 'react-google-login'
+import './Header.css'
 
 class Header extends Component {
     
     checkLogin = ()=>{
         this.props.onLogin()
+        //console.log(GoogleAuth.currentUser.get().getBasicProfile())
     }
 
     onLogoutSuccess = ()=>{
@@ -19,19 +21,27 @@ class Header extends Component {
     render(){
         const {isLogin} = this.props
         return(
-            <div>
+            <div
+                className = "header-wrapper">
             {isLogin ?
                 <div>
-                    <Link to="/mypage">TO MYPAGE</Link>
+                    <Link
+                        className = "header-mypage"
+                        to="/mypage">마이페이지</Link>
                     <GoogleLogout
-                    clientId = '622838244850-puib6rkcqqorg6fvs1lsd74tpr7jcsgn.apps.googleusercontent.com'
-                    buttonText = "LogOut"
-                    onLogoutSuccess={this.onLogoutSuccess}
-                    onFailure={this.onFailure}></GoogleLogout>
+                        className = "header-logout"
+                        clientId = '622838244850-puib6rkcqqorg6fvs1lsd74tpr7jcsgn.apps.googleusercontent.com'
+                        buttonText = "로그아웃"
+                        onLogoutSuccess={this.onLogoutSuccess}
+                        onFailure={this.onFailure}>
+                    </GoogleLogout>
                 </div>
                 :
                 <div>
-                    <Login checkLogin={this.checkLogin}/>
+                    <Login
+                        className = "header-login"
+                        checkLogin={this.checkLogin}>
+                    </Login>
                 </div>
             }
             </div>
