@@ -23,6 +23,7 @@ app.post('/api/signin', (req, res) => {
         id: req.body.id,
         name: req.body.name,
         provider: req.body.provider,
+        email : req.body.email,
         star: new Array,
         thumbsUp: new Array
     })

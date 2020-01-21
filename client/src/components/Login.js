@@ -10,6 +10,7 @@ class Login extends Component {
             id: '',
             name: '',
             provider: '',
+            email : '',
         }
     }
 
@@ -17,7 +18,8 @@ class Login extends Component {
         const data = {
             id: this.state.id,
             name: this.state.name,
-            provider: this.state.provider
+            provider: this.state.provider,
+            email : this.state.email
         }
         const response = await fetch('api/signin', {
             method: "POST",
@@ -37,6 +39,7 @@ class Login extends Component {
             id: res.googleId,
             name: res.w3.ig,
             provider: 'google',
+            email : res.w3.U3
         })
         
         this.callApi()
@@ -51,10 +54,11 @@ class Login extends Component {
 
     //session
     saveSession = () => {
-        const { id, name, provider } = this.state
+        const { id, name, provider,email } = this.state
         window.sessionStorage.setItem('id', id)
         window.sessionStorage.setItem('name', name)
         window.sessionStorage.setItem('provider', provider)
+        window.sessionStorage.setItem('email', email)
         this.props.checkLogin()
     }
 
