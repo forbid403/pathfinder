@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import StarItemList from './StarItemList';
+import LikeItemList from './LikeItemList';
 import StarListTemplate from './StarListTemplate'
 import DayPicker from 'react-day-picker';
 import logo from '../../images/logo_black.png';
@@ -16,13 +17,15 @@ class MyPage extends Component{
         this.handleDayClick = this.handleDayClick.bind(this);
 
         this.state = {
+            staredContests: [
+                {site:"Leetcode", title:"Junior Contest 2020 Jan", startTime:new Date("2020-01-31 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Leetcode", title:"Weekly 124 Contest", startTime:new Date("2020-01-28 12:00:00"), duration:"2.0", url:"http://www.google.com"},
+                {site:"Atcoder", title:"I Love Algorithm", startTime:new Date("2020-01-25 13:00:00"), duration:"2.0", url:"http://www.google.com"},
+            ],
             likedContests: [
                 {site:"Atcoder", title:"Go To Google", startTime:new Date("2020-01-12 12:00:00"), duration:"2.0", url:"http://www.google.com"},
                 {site:"Atcoder", title:"Wow But I'm Okay Naver", startTime:new Date("2020-01-15 12:00:00"), duration:"2.0", url:"http://www.naver.com"},
                 {site:"Topcoder", title:"Pan Pineapple Pinapple Pan Daum", startTime:new Date("2020-01-20 12:00:00"), duration:"2.0", url:"http://www.daum.net"},
-                {site:"Leetcode", title:"Junior Contest 2020 Jan", startTime:new Date("2020-01-31 12:00:00"), duration:"2.0", url:"http://www.google.com"},
-                {site:"Leetcode", title:"Weekly 124 Contest", startTime:new Date("2020-01-30 12:00:00"), duration:"2.0", url:"http://www.google.com"},
-                {site:"Atcoder", title:"I Love Algorithm", startTime:new Date("2020-01-25 13:00:00"), duration:"2.0", url:"http://www.google.com"},
                 {site:"Topcoder", title:"But I Love Chicken More", startTime:new Date("2020-01-10 12:00:00"), duration:"2.0", url:"http://www.google.com"},
             ],
             selectedDay: undefined,
@@ -32,14 +35,14 @@ class MyPage extends Component{
     }
 
     handleDayClick(day) {
-        const {likedContests} = this.state;
+        const {staredContests} = this.state;
 
         this.setState({selectedDay : day});
         
         let filtered = [];
         const selected = new Date(day).setHours(0, 0, 0, 0);
         console.log(new Date(day))
-        filtered = likedContests.filter(contest =>
+        filtered = staredContests.filter(contest =>
             new Date(contest.startTime).setHours(0, 0, 0, 0)   
                === selected);
                
@@ -47,14 +50,14 @@ class MyPage extends Component{
     }
 
     render(){
-        const {likedContests} = this.state;
+        const {staredContests} = this.state;
         let modifiers = {
             colorMe: [],
         };
         
-        for (let i in likedContests)
+        for (let i in staredContests)
         {
-            const contest = likedContests[i];
+            const contest = staredContests[i];
             const date = new Date(contest.startTime);
             const year = date.getFullYear();
             const month = date.getMonth();
@@ -102,7 +105,7 @@ class MyPage extends Component{
                         alt = "star"/>
                     <div clssName = "mypage-star-text"
                          style = {{display: "inline"}}>
-                    표시한 콘테스트: {this.state.likedContests.length}개
+                    표시한 콘테스트: {this.state.staredContests.length}개
                     </div>
                     <div className = "mypage-star-alarm"
                          style = {{display: "inline", float: "right"}}>
@@ -143,12 +146,16 @@ class MyPage extends Component{
                         alt = "like"/>
                     <div clssName = "mypage-star-text"
                          style = {{display: "inline"}}>
-                    표시한 콘테스트: n개
+                    표시한 콘테스트: {this.state.likedContests.length}개
                     </div>
                 </div>
 
                 <div className = "mypage-like-wrapper">
                     <div className = "mypage-like-list-wrapper">
+                        <StarListTemplate>
+                                    <LikeItemList
+                                        contests={this.state.likedContests} />
+                        </StarListTemplate>
                     </div>
                 </div>
             
