@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class LikeItemList extends Component {
   
-  dateToString(date) {
+  dateToString(data) {
+    const date = new Date(data)
     const year = date.getFullYear();
 
     let month = date.getMonth() + 1;

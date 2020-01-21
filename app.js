@@ -93,11 +93,47 @@ app.post('/api/star', (req, res) => {
     user.find().where('id').equals(req.body.id)
         .where('star').equals(new objId(req.body.contestId)).exec((err, ret) => {
             if (err) { console.log("/api/star", err); return; }
-
             if (ret.length > 0) res.json({ ret: 1 });
             else res.json({ ret: 0 });
         })
 })
+
+app.post('/api/getstared', (req, res) => {
+    
+    user.find().select('star').where('id').equals(req.body.id)
+        .exec(async (err, ret) => {
+            if (err) { console.log("/api/getstared", err); return; }
+            if(ret) res.send(ret)
+        });
+})
+
+
+app.post('/api/getthumbsUp', (req, res) => {
+    
+    user.find().select('thumbsUp').where('id').equals(req.body.id)
+        .exec(async (err, ret) => {
+            if (err) { console.log("/api/getthumbsUp", err); return; }
+            if(ret) res.send(ret)
+        });
+})
+
+app.post('/api/getstared/contest', (req, res) => {
+    contests.findOne().where('_id').equals(new objId(req.body.id))
+        .exec(async (err, ret) => {
+            if (err) { console.log("/api/getstared/contest", err); return; }
+            if(ret) res.send(ret)
+        });    
+})
+
+
+app.post('/api/getthumbsUp/contest', (req, res) => {
+    contests.findOne().where('_id').equals(new objId(req.body.id))
+        .exec(async (err, ret) => {
+            if (err) { console.log("/api/getthumbsUp/contest", err); return; }
+            if(ret) res.send(ret)
+        });    
+})
+
 
 app.post('/api/star/add', (req, res) => {
     const contestId = new objId(req.body.contestId)
