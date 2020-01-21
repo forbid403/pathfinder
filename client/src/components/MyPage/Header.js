@@ -13,6 +13,7 @@ class Header extends Component {
 
     onLogoutSuccess = ()=>{
         this.props.onLogOut()
+        window.location.reload()
     }
     onFailure = (res)=>{
         console.error(res)

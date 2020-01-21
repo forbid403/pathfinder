@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { GoogleLogin } from 'react-google-login'
+import { useHistory } from 'react-router-dom'
 
 class Login extends Component {
 
@@ -40,6 +41,7 @@ class Login extends Component {
         
         this.callApi()
         .then(() => this.saveSession())
+        .then(()=>window.location.reload())
     }
 
     //Login Fail

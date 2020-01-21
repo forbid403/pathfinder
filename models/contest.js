@@ -7,7 +7,8 @@ const contestSchema = new Schema({
     startTime : {type : Date, required : true},
     duration : {type : String, required : true},
     url : {type : String, required : true, unique : true},
-    num : {type : Number, default : 0}
+    num : {type : Number, default : 0},
+    thumbsup : {type : Number, default : 0}
 })
 
 module.exports = mongoose.model('contest', contestSchema)
