@@ -9,6 +9,7 @@ import star from '../../images/star_yellow.png'
 import like from '../../images/like_color.png'
 import "./MyPage.css"
 import 'react-day-picker/lib/style.css';
+import {GoogleAuth} from 'react-google-login'
 
 class MyPage extends Component{
     constructor(props) {
@@ -32,6 +33,7 @@ class MyPage extends Component{
             selectedContests: [],
             now: new Date(2020, 1)
         };
+
     }
 
     handleDayClick(day) {
