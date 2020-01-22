@@ -156,7 +156,12 @@ class Home extends Component {
         if (id) {
             this.onLogin()
         }
+
     }
+
+
+
+
 
     onLogin = () => {
         this.setState({
