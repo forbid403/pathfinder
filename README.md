@@ -1,6 +1,6 @@
 # pathfinder
 
-<img src="/algosipda.PNG" width="450px" height="300px"></img>
+<img src="/algosipda.PNG"></img>
 
 ### 기술 스택
 - Node.js, React, MongoDB, axios, puppeteer
@@ -24,7 +24,7 @@
 - 로그인 시, 즐겨찾기 버튼과 좋아요 버튼으로 mypage에서 대회들을 관리할 수 있음
 - 구글 로그인으로 세션과 DB 저장 가능
 
-<img src="/mypage.PNG" width="450px" height="300px"></img>
+<img src="/mypage.PNG"></img>
 
 ## My Page
 - 즐겨찾기 한 대회들을 캘린더에서 볼 수 있음. 클릭 시 해당 대회 사이트로 이동

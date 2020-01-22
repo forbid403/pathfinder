@@ -5,6 +5,15 @@ import {GoogleLogout, /*GoogleAuth*/} from 'react-google-login'
 import './Header.css'
 
 class Header extends Component {
+
+    constructor(props)
+    {
+        super(props)
+
+        this.state = {
+            profileImgSrc: ''
+        }
+    }
     
     checkLogin = ()=>{
         this.props.onLogin()

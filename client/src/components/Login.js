@@ -51,7 +51,7 @@ class Login extends Component {
 
     //session
     saveSession = () => {
-        const { id, name, provider } = this.state
+        const { id, name, provider, image } = this.state
         window.sessionStorage.setItem('id', id)
         window.sessionStorage.setItem('name', name)
         window.sessionStorage.setItem('provider', provider)
@@ -59,6 +59,7 @@ class Login extends Component {
     }
 
     render() {
+ 
         return (<div>
 
             <GoogleLogin

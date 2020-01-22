@@ -3,7 +3,7 @@ import StarItemList from './StarItemList';
 import LikeItemList from './LikeItemList';
 import StarListTemplate from './StarListTemplate'
 import DayPicker from 'react-day-picker';
-import logo from '../../images/logo_black.png';
+import logo from '../../images/new_logo.png';
 import tmp_profile from '../../images/tmp_google_image.png';
 import star from '../../images/star_yellow.png'
 import like from '../../images/like_color.png'
@@ -102,7 +102,7 @@ class MyPage extends Component {
             this.getContestsLiked(body[0].thumbsUp)
         }
     }
-
+    
     constructor(props) {
         super(props);
 
