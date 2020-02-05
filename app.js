@@ -99,7 +99,6 @@ app.post('/api/star', (req, res) => {
 })
 
 app.post('/api/getstared', (req, res) => {
-    
     user.find().select('star').where('id').equals(req.body.id)
         .exec(async (err, ret) => {
             if (err) { console.log("/api/getstared", err); return; }
@@ -109,7 +108,6 @@ app.post('/api/getstared', (req, res) => {
 
 
 app.post('/api/getthumbsUp', (req, res) => {
-    
     user.find().select('thumbsUp').where('id').equals(req.body.id)
         .exec(async (err, ret) => {
             if (err) { console.log("/api/getthumbsUp", err); return; }
@@ -121,6 +119,8 @@ app.post('/api/getstared/contest', (req, res) => {
     contests.findOne().where('_id').equals(new objId(req.body.id))
         .exec(async (err, ret) => {
             if (err) { console.log("/api/getstared/contest", err); return; }
+            console.log(ret)
+
             if(ret) res.send(ret)
         });    
 })

@@ -64,7 +64,7 @@ class Login extends Component {
 
             <GoogleLogin
                 type="submit"
-                clientId='622838244850-i7fc7hji7e67mibq72293v9ld1n1nlgg.apps.googleusercontent.com'
+                clientId='622838244850-c3g23dvud4bt6aaumnr8q4dtgu0lss0s.apps.googleusercontent.com'
                 buttonText="로그인"
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseFail}>
