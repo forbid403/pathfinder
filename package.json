@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.614.0",
     "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
     "cheerio-crawler": "^1.1.1",
