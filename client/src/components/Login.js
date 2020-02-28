@@ -33,15 +33,16 @@ class Login extends Component {
 
     //Google Login
     responseGoogle = (res) => {
+        console.log(res)
         this.setState({
             id: res.googleId,
-            name: res.w3.ig,
+            name: res.Rt.Ad,
             provider: 'google',
         })
         
         this.callApi()
         .then(() => this.saveSession())
-        .then(()=>window.location.reload())
+        .then(() =>window.location.reload())
     }
 
     //Login Fail
