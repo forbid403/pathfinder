@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "heroku": "cd client && yarn install && yarn build",
     "client": "cd client && npm start",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "cheerio-crawler": "^1.1.1",
     "debug": "^4.1.1",
     "express": "^4.17.1",
+    "heroku": "^7.38.2",
     "mobiscroll": "^3.0.0-beta6",
     "mongoose": "^5.8.9",
     "node-schedule": "^1.3.2",
