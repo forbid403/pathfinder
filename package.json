@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  
   "scripts": {
     "heroku": "cd client && yarn install && yarn build",
     "client": "cd client && npm start",
