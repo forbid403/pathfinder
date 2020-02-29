@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "cd client && yarn install && yarn build",
-    "client": "cd client && npm start",
+    "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
