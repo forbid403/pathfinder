@@ -38,6 +38,7 @@
     "react-helmet": "^5.2.1",
     "react-lines-ellipsis": "^0.14.1",
     "react-router-dom": "^5.1.2",
+    "react-script": "^2.0.5",
     "sanitize-html": "^1.22.0",
     "yarn": "^1.22.0"
   }
