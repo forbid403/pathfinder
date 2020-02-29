@@ -9,6 +9,9 @@
     "server": "nodemon server.js",
     "heroku-postbuild": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
+  "engines": {
+    "node": "10.15.0"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
