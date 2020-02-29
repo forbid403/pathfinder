@@ -10,7 +10,8 @@
     "heroku-postbuild": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "engines": {
-    "node": "10.15.0"
+    "node": "10.15.0",
+    "yarn" : "1.21.1"
   },
   "author": "",
   "license": "ISC",
