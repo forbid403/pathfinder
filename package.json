@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "heroku-postbuild": "cd client && yarn install && yarn build",
-    "server": "nodemon server.js",
+    "server": "nodemon app.js",
     "client": "yarn run start --prefix client",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "engines": {
     "node": "10.15.0",
