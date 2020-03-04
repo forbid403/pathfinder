@@ -8,7 +8,7 @@
     "server": "nodemon app.js",
     "client": "yarn run start --prefix client",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "node app.js"
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "engines": {
     "node": "10.15.0",
